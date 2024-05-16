@@ -37,9 +37,7 @@ defineProps({
   <div class="mt-10">
     <app-card-list v-auto-animate />
 
-    <app-loader v-if="loadingStatus"/>
-
-
+    <app-loader v-if="loadingStatus" />
   </div>
 </template>
 

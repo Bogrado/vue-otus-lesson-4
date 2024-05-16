@@ -1,6 +1,5 @@
 <script setup>
 
-
 import TheHeader from '@/components/TheHeader.vue'
 import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
@@ -42,6 +41,8 @@ onMounted(() => {
     <div class="p-10">
       <the-home :loadingStatus="loadingStatus"/>
     </div>
+
   </div>
+
 </template>
 

@@ -19,7 +19,6 @@ export default {
         axios
           .get(baseUrl)
           .then(response => {
-            console.log(response.data)
             commit('setItems', response.data)
           })
           .catch(error => {

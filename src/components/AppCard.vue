@@ -1,4 +1,5 @@
 <script setup>
+
 defineProps({
   item: {
     type: Object,
@@ -9,8 +10,10 @@ defineProps({
 </script>
 
 <template>
+
   <div
-    class="h-full relative bg-white border border-slate-100 rounded-3xl p-8 cursor-pointer hover:-translate-y-2 hover:shadow-xl transition">
+    class="h-full relative bg-white border border-slate-100 rounded-3xl p-8 cursor-pointer hover:-translate-y-2 hover:shadow-xl transition"
+  >
 
     <div class="min-h-full flex flex-col ">
 
@@ -21,6 +24,7 @@ defineProps({
           alt="like 1"
           class="absolute top-4 left-4"
         />
+
         <img
           class="flex flex-grow flex-col "
           :src="item.image" alt="item" />
@@ -28,12 +32,13 @@ defineProps({
       </div>
 
       <div class="footer">
+
         <p>{{ item.title }}</p>
 
         <div class="flex justify-between mt-5 ">
           <div class="flex flex-col">
             <span class="text-slate-400">Цена: </span>
-            <b class="mt-2">{{ item.price }}</b>
+            <b class="mt-2">{{ item.price }} Руб.</b>
           </div>
 
           <img
