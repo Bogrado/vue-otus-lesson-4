@@ -4,9 +4,17 @@
 import TheHeader from '@/components/TheHeader.vue'
 import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
+import index from '@/store'
+import { onMounted } from 'vue'
+
+onMounted(async () => {
+  await index.dispatch('fetchItems')
+})
 </script>
 
 <template>
+
+  <button>+</button>
 
 <!--  <app-drawer />-->
 

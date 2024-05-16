@@ -1,60 +1,37 @@
+import axios from 'axios'
+
 export default {
   state() {
     return {
-      items: [{
-        id: 1,
-        title: 'Молоко',
-        price: 123,
-        description: 'Очень вкусное молоко',
-        category: 'Молочные продукты',
-        image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-        rating: {
-          rate: 3.9,
-          count: 120
-        }
-      },
-        {
-          id: 2,
-          title: 'Молоко',
-          price: 10200,
-          description: 'Очень вкусное молоко',
-          category: 'Молочные продукты',
-          image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-          rating: {
-            rate: 3.9,
-            count: 120
-          }
-        },
-        {
-          id: 3,
-          title: 'Молоко',
-          price: 100,
-          description: 'Очень вкусное молоко',
-          category: 'Молочные продукты',
-          image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-          rating: {
-            rate: 3.9,
-            count: 120
-          }
-        },
-        {
-          id: 4,
-          title: 'Молоко',
-          price: 5000,
-          description: 'Очень вкусное молоко',
-          category: 'Молочные продукты',
-          image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-          rating: {
-            rate: 3.9,
-            count: 120
-          }
-        }
-      ]
+      items: []
     }
   },
   getters: {
     getItemsList(state) {
       return state.items
+    }
+  },
+  actions: {
+    fetchItems({ commit }) {
+      const baseUrl = 'https://6645e2c9b8925626f8939a7f.mockapi.io/items'
+      axios
+        .get(baseUrl)
+        .then(response => {
+          console.log(response.data)
+          commit('setItems', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  },
+  mutations: {
+    setItems(state, items) {
+      state.items = items.map(item => {
+        return {
+          ...item
+        }
+      })
     }
   }
 }
