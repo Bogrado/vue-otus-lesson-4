@@ -56,7 +56,6 @@ const closeDrawer = () => {
     <!--      />-->
     <!--    </div>-->
 
-
   </div>
 </template>
 
