@@ -4,7 +4,7 @@
 import TheHeader from '@/components/TheHeader.vue'
 import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
-import  index  from '@/store'
+import { index }  from '@/store'
 import { computed } from 'vue'
 import { onMounted } from 'vue'
 

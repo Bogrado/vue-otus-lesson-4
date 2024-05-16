@@ -1,7 +1,7 @@
 <script setup>
 import AppCard from '@/components/AppCard.vue'
 import { computed } from 'vue'
-import index from '@/store'
+import { index } from '@/store'
 
 const getItemsList = computed(() => index.getters.getItemsList)
 </script>
