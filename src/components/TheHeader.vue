@@ -1,5 +1,19 @@
 <script setup>
 
+const props = defineProps({
+  isDrawerOpen: {
+    type: Boolean,
+    required: true
+  }
+})
+
+const emits = defineEmits(['openDrawer'])
+
+const OpenDrawer = () => {
+  if (!props.isDrawerOpen)
+  emits('openDrawer')
+}
+
 </script>
 
 <template>
@@ -15,7 +29,7 @@
     </div>
 
     <ul class="flex items-center gap-10">
-      <li class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white" @click="$emit('openDrawer')">
+      <li class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white" @click="OpenDrawer">
         <img
           src="../assets/cart.svg" alt="Cart">
         <b>20000 руб.</b>

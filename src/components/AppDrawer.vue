@@ -1,15 +1,22 @@
 <script setup>
-
 import AppDrawerHead from '@/components/AppDrawerHead.vue'
+import { index } from '@/store/index.js'
+
+const closeDrawer = () => {
+  if (index.getters.isOpen) {
+    index.commit('changeVisibility')
+  }
+}
+
 </script>
 
 <template>
-  <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
+  <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70" @click="closeDrawer"></div>
   <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-20 p-10">
 
-    <app-drawer-head />
+    <app-drawer-head @close-drawer="closeDrawer" />
 
-<!--    <AppCartItemList v-if="totalPrice" />-->
+    <!--    <AppCartItemList v-if="totalPrice" />-->
 
     <div class="flex flex-col gap-4 mt-7">
       <div class="flex gap-2">
@@ -30,24 +37,24 @@ import AppDrawerHead from '@/components/AppDrawerHead.vue'
       </button>
     </div>
 
-<!--    <div-->
-<!--      v-if="!totalPrice || orderId"-->
-<!--      class="flex h-full items-center"-->
-<!--    >-->
-<!--      <AppInfoBlock-->
-<!--        v-if="!totalPrice && !orderId"-->
-<!--        title="Empty"-->
-<!--        description="Корзина пуста, добавьте товары"-->
-<!--        image-url="/package-icon.png"-->
-<!--      />-->
+    <!--    <div-->
+    <!--      v-if="!totalPrice || orderId"-->
+    <!--      class="flex h-full items-center"-->
+    <!--    >-->
+    <!--      <AppInfoBlock-->
+    <!--        v-if="!totalPrice && !orderId"-->
+    <!--        title="Empty"-->
+    <!--        description="Корзина пуста, добавьте товары"-->
+    <!--        image-url="/package-icon.png"-->
+    <!--      />-->
 
-<!--      <AppInfoBlock-->
-<!--        v-if="orderId"-->
-<!--        title="Заказ оформлен"-->
-<!--        :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"-->
-<!--        image-url="/order-success-icon.png"-->
-<!--      />-->
-<!--    </div>-->
+    <!--      <AppInfoBlock-->
+    <!--        v-if="orderId"-->
+    <!--        title="Заказ оформлен"-->
+    <!--        :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"-->
+    <!--        image-url="/order-success-icon.png"-->
+    <!--      />-->
+    <!--    </div>-->
 
 
   </div>

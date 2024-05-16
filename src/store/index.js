@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
-import drawer from '@/store/drawer.js'
+import drawer from '@/store/drawer'
 
-export default createStore({
+export const index = createStore({
   modules: {
     drawer
   }
