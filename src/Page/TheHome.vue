@@ -1,6 +1,14 @@
 <script setup>
 
 import AppCardList from '@/components/AppCardList.vue'
+import AppLoader from '@/components/UI/AppPreloader.vue'
+
+defineProps({
+  loadingStatus: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
@@ -27,7 +35,14 @@ import AppCardList from '@/components/AppCardList.vue'
   </div>
 
   <div class="mt-10">
-    <app-card-list/>
+    <app-card-list />
+
+
+    <app-loader
+      v-if="loadingStatus"
+    />
+
+
   </div>
 </template>
 

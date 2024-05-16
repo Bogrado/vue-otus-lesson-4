@@ -10,12 +10,18 @@ import { onMounted } from 'vue'
 
 const isDrawerOpen = computed(() => index.getters.isOpen)
 
+const loadingStatus = computed(() => index.getters.getLoading)
+
 const changeVisibility = () => {
   index.commit('changeVisibility')
 }
 
-onMounted(async () => {
+const fetchItems = async () => {
   await index.dispatch('fetchItems')
+}
+
+onMounted(() => {
+  fetchItems()
 })
 
 </script>
@@ -34,7 +40,7 @@ onMounted(async () => {
     />
 
     <div class="p-10">
-      <the-home/>
+      <the-home :loadingStatus="loadingStatus"/>
     </div>
   </div>
 </template>
