@@ -27,7 +27,7 @@ import AppCardList from '@/components/AppCardList.vue'
   </div>
 
   <div class="mt-10">
-    <app-card-list/>
+    <app-card-list v-auto-animate/>
   </div>
 </template>
 
