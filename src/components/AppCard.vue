@@ -1,5 +1,7 @@
 <script setup>
 
+import SvgLikeIt from '@/components/UI/svg/SvgLikeIt.vue'
+
 defineProps({
   item: {
     type: Object,
