@@ -2,6 +2,7 @@
 
 import AppCardList from '@/components/AppCardList.vue'
 import AppLoader from '@/components/UI/AppPreloader.vue'
+import SvgSearch from '@/components/UI/svg/SvgSearch.vue'
 
 defineProps({
   loadingStatus: {
@@ -25,7 +26,8 @@ defineProps({
       </select>
 
       <div class="relative">
-        <img class="absolute left-4 top-3" src="../assets/search.svg" alt="search">
+        <!--        <img class="absolute left-4 top-3" src="../assets/search.svg" alt="search">-->
+        <svg-search class="absolute left-4 top-3" />
         <input
           class="border border-gray-200 rounded-md py-1.5 pl-12 pr-4 outline-none focus:border-gray-400"
           type="text" placeholder="Поиск...">

@@ -1,5 +1,8 @@
 <script setup>
 
+import SvgSearch from '@/components/UI/svg/SvgSearch.vue'
+import SvgCart from '@/components/UI/svg/SvgCart.vue'
+
 const props = defineProps({
   isDrawerOpen: {
     type: Boolean,
@@ -30,8 +33,9 @@ const OpenDrawer = () => {
 
     <ul class="flex items-center gap-10">
       <li class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white" @click="OpenDrawer">
-        <img
-          src="../assets/cart.svg" alt="Cart">
+
+        <svg-cart />
+
         <b>20000 руб.</b>
       </li>
     </ul>
