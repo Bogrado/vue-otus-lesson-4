@@ -7,7 +7,4 @@ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 const app = createApp(App)
 
-app
-  .use(autoAnimatePlugin)
-  .use(index)
-  .mount('#app')
+app.use(autoAnimatePlugin).use(index).mount('#app')

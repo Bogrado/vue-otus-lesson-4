@@ -17,7 +17,7 @@ export default {
 
       try {
         const params = {
-          sortBy: this.getters.getSortBy,
+          sortBy: this.getters.getSortBy
         }
         if (params.sortBy === 'default') {
           params.sortBy = ''
@@ -30,13 +30,11 @@ export default {
         const { data } = await axios.get('https://6452649f4b080307.mokky.dev/items', { params })
 
         commit('setItems', data)
-
       } catch (error) {
         console.log(error)
       } finally {
         commit('setLoading', false)
       }
-
 
       // axios
       //   .get(url)
@@ -49,12 +47,11 @@ export default {
       //   .finally(() => {
       //     commit('setLoading', false)
       //   })
-
     }
   },
   mutations: {
     setItems(state, items) {
-      state.items = items.map(item => {
+      state.items = items.map((item) => {
         return {
           ...item
         }

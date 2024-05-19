@@ -1,7 +1,5 @@
 <script setup>
-
 const emit = defineEmits(['closeDrawer'])
-
 </script>
 
 <template>
@@ -34,6 +32,4 @@ const emit = defineEmits(['closeDrawer'])
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

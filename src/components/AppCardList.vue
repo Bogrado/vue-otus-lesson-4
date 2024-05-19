@@ -8,10 +8,8 @@ const getItemsList = computed(() => index.getters.getItemsList)
 
 <template>
   <div class="grid grid-cols-4 gap-4 mt-10">
-    <AppCard v-for="item in getItemsList" :key="item.id" :item="item"/>
+    <AppCard v-for="item in getItemsList" :key="item.id" :item="item" />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

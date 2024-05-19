@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <div class="min-h-16 mt-10">
@@ -8,6 +6,4 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -16,11 +16,11 @@ export default {
   mutations: {
     setSearchValue(state, searchValue) {
       state.searchValue = searchValue
-    },
+    }
   },
   actions: {
     setSearchValue({ commit }, searchValue) {
       commit('setSearchValue', searchValue)
-    },
+    }
   }
 }
