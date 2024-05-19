@@ -17,10 +17,14 @@ export default {
 
       try {
         const params = {
-          sortBy: this.getters.getSortBy
+          sortBy: this.getters.getSortBy,
         }
         if (params.sortBy === 'default') {
           params.sortBy = ''
+        }
+
+        if (this.getters.getSearchValue) {
+          params.title = `*${this.getters.getSearchValue}*`
         }
 
         const { data } = await axios.get('https://6452649f4b080307.mokky.dev/items', { params })
@@ -32,11 +36,6 @@ export default {
       } finally {
         commit('setLoading', false)
       }
-
-
-
-
-
 
 
       // axios
