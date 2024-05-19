@@ -4,7 +4,7 @@ import { index } from '@/store/index.js'
 
 const closeDrawer = () => {
   if (index.getters.isOpen) {
-    index.commit('changeVisibility')
+    index.dispatch('changeVisibility')
   }
 }
 
