@@ -3,9 +3,10 @@
 import AppCardList from '@/components/AppCardList.vue'
 import AppLoader from '@/components/UI/AppPreloader.vue'
 import AppSort from '@/components/AppSort.vue'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { index } from '@/store/index.js'
 import AppSearch from '@/components/AppSearch.vue'
+import SvgSearch from '@/components/UI/svg/SvgSearch.vue'
 import debounce from 'lodash.debounce'
 
 defineProps({
@@ -14,6 +15,7 @@ defineProps({
     default: false
   }
 })
+
 const sortBy = computed(() => index.getters.getSortBy)
 const filters = computed(() => index.getters.getFilters)
 const searchPlaceholder = computed(() => index.getters.getPlaceholder)
@@ -32,32 +34,33 @@ onMounted(() => {
   fetchItems()
 })
 
-
-// const search = (searchValue) => {
-//   index.dispatch('setSearchValue', searchValue)
-// }
-
 const search = debounce((searchValue) => {
   index.dispatch('setSearchValue', searchValue)
 }, 500)
 
 
 watch([sortBy, searchValue], fetchItems)
-
-
 </script>
 
 <template>
 
   <div class="flex justify-between items-center">
 
-    <h2 class="text-3xl font-bold">{{ index.getters.getSearchValue }}</h2>
+    <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">
 
       <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />
 
       <app-search :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="search" />
+
+<!--      <div class="relative">-->
+<!--        &lt;!&ndash;        <img class="absolute left-4 top-3" src="../assets/search.svg" alt="search">&ndash;&gt;-->
+<!--        <svg-search class="absolute left-4 top-3" />-->
+<!--        <input-->
+<!--          class="border border-gray-200 rounded-md py-1.5 pl-12 pr-4 outline-none focus:border-gray-400"-->
+<!--          type="text" placeholder="Поиск...">-->
+<!--      </div>-->
 
     </div>
 
