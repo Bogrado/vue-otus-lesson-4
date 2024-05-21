@@ -5,7 +5,6 @@ import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
 import { index }  from '@/store'
 import { computed } from 'vue'
-import { onMounted } from 'vue'
 
 const isDrawerOpen = computed(() => index.getters.isOpen)
 
@@ -14,14 +13,6 @@ const loadingStatus = computed(() => index.getters.getLoading)
 const changeVisibility = () => {
   index.commit('changeVisibility')
 }
-
-const fetchItems = async () => {
-  await index.dispatch('fetchItems')
-}
-
-onMounted(() => {
-  fetchItems()
-})
 
 </script>
 

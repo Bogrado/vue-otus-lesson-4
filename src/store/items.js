@@ -15,19 +15,18 @@ export default {
     fetchItems({ commit }) {
       const baseUrl = 'https://6645e2c9b8925626f8939a7f.mockapi.io/items'
       commit('setLoading', true)
-      setTimeout(() => {
-        axios
-          .get(baseUrl)
-          .then(response => {
-            commit('setItems', response.data)
-          })
-          .catch(error => {
-            console.log(error)
-          })
-          .finally(() => {
-            commit('setLoading', false)
-          })
-      }, 10000)
+
+      axios
+        .get(baseUrl)
+        .then(response => {
+          commit('setItems', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        .finally(() => {
+          commit('setLoading', false)
+        })
 
     }
   },
