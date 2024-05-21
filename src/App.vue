@@ -1,22 +1,39 @@
 <script setup>
 
-
 import TheHeader from '@/components/TheHeader.vue'
 import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
+import { index }  from '@/store'
+import { computed } from 'vue'
+
+const isDrawerOpen = computed(() => index.getters.isOpen)
+
+const loadingStatus = computed(() => index.getters.getLoading)
+
+const changeVisibility = () => {
+  index.commit('changeVisibility')
+}
+
 </script>
 
 <template>
 
-<!--  <app-drawer />-->
+  <app-drawer
+    v-if="isDrawerOpen"
+  />
 
   <div class="w-4/5 m-auto bg-white rounded-xl shadow-2xl mt-14">
 
-    <TheHeader />
+    <TheHeader
+      @open-drawer="changeVisibility"
+      :is-drawer-open="isDrawerOpen"
+    />
 
     <div class="p-10">
-      <the-home/>
+      <the-home :loadingStatus="loadingStatus"/>
     </div>
+
   </div>
+
 </template>
 
