@@ -21,6 +21,6 @@ export default {
   actions: {
     setSearchValue({ commit }, searchValue) {
       commit('setSearchValue', searchValue)
-    }
+    },
   }
 }
