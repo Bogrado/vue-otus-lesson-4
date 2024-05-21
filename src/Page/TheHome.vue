@@ -1,6 +1,6 @@
 <script setup>
 
-import AppCardList from '@/components/AppCardList.vue'
+import AppProductsList from '@/components/AppProductsList.vue'
 import AppLoader from '@/components/UI/AppPreloader.vue'
 import { index } from '@/store/index.js'
 import { onMounted } from 'vue'
@@ -45,7 +45,7 @@ onMounted(() => {
   </div>
 
   <div class="mt-10">
-    <app-card-list v-auto-animate />
+    <app-products-list v-auto-animate />
 
     <app-loader v-if="loadingStatus" />
   </div>
