@@ -2,8 +2,11 @@
 
 import AppProductsList from '@/components/AppProductsList.vue'
 import AppLoader from '@/components/UI/AppPreloader.vue'
-import { index } from '@/store/index.js'
-import { onMounted } from 'vue'
+import AppSort from '@/components/AppSort.vue'
+import AppSearch from '@/components/AppSearch.vue'
+import { computed, onMounted, watch } from 'vue'
+import { index } from '@/store'
+import debounce from 'lodash.debounce'
 
 defineProps({
   loadingStatus: {
@@ -12,6 +15,16 @@ defineProps({
   }
 })
 
+const sortBy = computed(() => index.getters.getSortBy)
+const filters = computed(() => index.getters.getFilters)
+const searchPlaceholder = computed(() => index.getters.getPlaceholder)
+const searchValue = computed(() => index.getters.getSearchValue)
+
+const changeSortBy = (sortBy) => {
+  index.dispatch('changeSortBy', sortBy)
+  console.log(index.getters.getSortBy)
+}
+
 const fetchItems = async () => {
   await index.dispatch('fetchItems')
 }
@@ -19,29 +32,23 @@ const fetchItems = async () => {
 onMounted(() => {
   fetchItems()
 })
+
+const searchItem = debounce((searchValue) => {
+  index.dispatch('setSearchValue', searchValue)
+}, 500)
+
+watch([sortBy, searchValue], fetchItems)
 </script>
 
 <template>
   <div class="flex justify-between items-center">
-
     <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">
-      <select
-        class="py-1.5 px-3 border border-gray-200 rounded-md outline-none focus:border-gray-400">
-        <option value="name">По названию</option>
-        <option value="price">По цене (Сначала недорогие)</option>
-        <option value="-price">По цене (Подороже)</option>
-      </select>
+      <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />
 
-      <div class="relative">
-        <img class="absolute left-4 top-3" src="../assets/search.svg" alt="search">
-        <input
-          class="border border-gray-200 rounded-md py-1.5 pl-12 pr-4 outline-none focus:border-gray-400"
-          type="text" placeholder="Поиск...">
-      </div>
+      <app-search :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="searchItem" />
     </div>
-
   </div>
 
   <div class="mt-10">
@@ -51,6 +58,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -12,6 +12,4 @@ const ItemsList = computed(() => index.getters.getItemsList)
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -12,27 +12,35 @@ export default {
     }
   },
   actions: {
-    fetchItems({ commit }) {
-      const baseUrl = 'https://6645e2c9b8925626f8939a7f.mockapi.io/items'
+    async fetchItems({ commit }) {
       commit('setLoading', true)
 
-      axios
-        .get(baseUrl)
-        .then(response => {
-          commit('setItems', response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-        .finally(() => {
-          commit('setLoading', false)
-        })
+      try {
+        const params = {
+          sortBy: this.getters.getSortBy
+        }
+        if (params.sortBy === 'default') {
+          params.sortBy = ''
+        }
+
+        if (this.getters.getSearchValue) {
+          params.title = `*${this.getters.getSearchValue}*`
+        }
+
+        const { data } = await axios.get('https://6452649f4b080307.mokky.dev/items', { params })
+
+        commit('setItems', data)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        commit('setLoading', false)
+      }
 
     }
   },
   mutations: {
     setItems(state, items) {
-      state.items = items.map(item => {
+      state.items = items.map((item) => {
         return {
           ...item
         }
