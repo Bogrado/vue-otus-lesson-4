@@ -32,7 +32,7 @@ onMounted(() => {
   fetchItems()
 })
 
-const search = debounce((searchValue) => {
+const searchItem = debounce((searchValue) => {
   index.dispatch('setSearchValue', searchValue)
 }, 500)
 
@@ -46,7 +46,7 @@ watch([sortBy, searchValue], fetchItems)
     <div class="flex gap-4">
       <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />
 
-      <app-search :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="search" />
+      <app-search :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="searchItem" />
     </div>
   </div>
 
