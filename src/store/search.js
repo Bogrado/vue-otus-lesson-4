@@ -22,8 +22,5 @@ export default {
     setSearchValue({ commit }, searchValue) {
       commit('setSearchValue', searchValue)
     },
-    clearSearchValue({ commit }) {
-      commit('setSearchValue', '')
-    }
   }
 }
