@@ -35,14 +35,16 @@ export default {
       } finally {
         commit('setLoading', false)
       }
-
-    }
+    },
   },
   mutations: {
     setItems(state, items) {
       state.items = items.map((item) => {
         return {
-          ...item
+          ...item,
+          isFavorite: false,
+          favoriteId: null,
+          isAdded: false
         }
       })
     }
