@@ -1,6 +1,7 @@
 <script setup>
 import AppDrawerHead from '@/components/AppDrawerHead.vue'
 import { index } from '@/store/index.js'
+import AppCartItemsList from '@/components/AppCartItemsList.vue'
 
 const closeDrawer = () => {
   if (index.getters.isOpen) {
@@ -14,7 +15,7 @@ const closeDrawer = () => {
   <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-20 p-10">
     <app-drawer-head @close-drawer="closeDrawer" />
 
-    <!--    <AppCartItemList v-if="totalPrice" />-->
+    <app-cart-items-list />
 
     <div class="flex flex-col gap-4 mt-7">
       <div class="flex gap-2">
