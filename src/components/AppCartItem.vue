@@ -9,7 +9,7 @@ import SvgCross from '@/components/UI/svg/SvgCross.vue'
       <p>title</p>
       <div class="flex justify-between mt-2">
         <b class="flex-1">10000 руб.</b>
-        <svg-cross class="opacity-40 hover:opacity-100 cursor-pointer transition" />
+        <svg-cross class="opacity-40 hover:opacity-100 cursor-pointer transition w-4 h-4" />
       </div>
     </div>
   </div>
