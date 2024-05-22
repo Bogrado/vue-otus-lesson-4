@@ -3,6 +3,15 @@ import AppDrawerHead from '@/components/AppDrawerHead.vue'
 import { index } from '@/store/index.js'
 import AppCartItemsList from '@/components/AppCartItemsList.vue'
 
+defineProps({
+  totalPrice: {
+    type: Number,
+    required: true
+  }
+})
+
+
+
 const closeDrawer = () => {
   if (index.getters.isOpen) {
     index.dispatch('changeVisibility')
@@ -21,7 +30,7 @@ const closeDrawer = () => {
       <div class="flex gap-2">
         <span>Итого:</span>
         <div class="flex-1 border-b border-dashed"></div>
-        <b>20000 руб.</b>
+        <b>{{ totalPrice }}</b>
       </div>
       <div class="flex gap-2">
         <span>На пиво 5%:</span>

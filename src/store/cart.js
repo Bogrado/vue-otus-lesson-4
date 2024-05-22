@@ -1,15 +1,16 @@
 export default {
   state() {
     return {
-      items: []
+      items: [],
+      tax: 0.05
     }
   },
   getters: {
     getCartItemsList(state) {
       return state.items
     },
-    itemIsAdded(state) {
-      return (id) => state.items.find((el) => el.id === id).isAdded
+    getTotalPrice(state) {
+      return Number((state.items.reduce((acc, el) => acc + el.price * el.quantityWTB, 0)).toFixed(2))
     }
   },
   actions: {

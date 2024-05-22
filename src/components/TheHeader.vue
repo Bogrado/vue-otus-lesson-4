@@ -5,6 +5,10 @@ const props = defineProps({
   isDrawerOpen: {
     type: Boolean,
     required: true
+  },
+  totalPrice: {
+    type: Number,
+    required: true
   }
 })
 
@@ -34,7 +38,7 @@ const OpenDrawer = () => {
       >
         <svg-cart />
 
-        <b>20000 руб.</b>
+        <b>{{ totalPrice }}</b>
       </li>
     </ul>
   </header>
