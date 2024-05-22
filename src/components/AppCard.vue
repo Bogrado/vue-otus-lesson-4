@@ -9,6 +9,7 @@ defineProps({
     required: true
   }
 })
+
 </script>
 
 <template>
@@ -50,7 +51,10 @@ defineProps({
             <b class="mt-2 text-white">{{ item.price }} Руб.</b>
           </div>
 
-          <svg-add class="cursor-pointer hover:stroke-slate-400"/>
+          <svg-add
+            class="cursor-pointer hover:stroke-slate-400"
+            @click="$emit('onClickAdd', item)"
+          />
         </div>
       </div>
     </div>

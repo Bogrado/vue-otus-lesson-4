@@ -44,7 +44,8 @@ export default {
           ...item,
           isFavorite: false,
           favoriteId: null,
-          isAdded: false
+          isAdded: false,
+          quantityWTB: 0 // for cart quantity want to buy
         }
       })
     }

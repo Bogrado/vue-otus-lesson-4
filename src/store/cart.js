@@ -5,7 +5,7 @@ export default {
     }
   },
   getters: {
-    getItemsList(state) {
+    getCartItemsList(state) {
       return state.items
     }
   },
@@ -13,17 +13,25 @@ export default {
     addToCart({ commit }, item) {
       commit('addItem', item)
     },
-    removeFromCart({ commit }, index) {
-      commit('removeItem', index)
-    }
+    // removeFromCart({ commit }, index) {
+    //   commit('removeItem', index)
+    // }
   },
   mutations: {
     addItem(state, item) {
       item.isAdded = true
-      state.items.push(item)
+      const element = state.items.find((el) => el.id === item.id)
+      if (element) {
+        this.commit('increaseQuantity', state.items.indexOf(element)) // а как каркать, куда я жмав, ну вроде работает, надо проверить всё
+        return
+      }
+      state.items.push({ ...item, quantityWTB: 1 })
     },
-    removeItem(state, index) {
-      state.items.splice(index, 1)
-    }
+    increaseQuantity(state, index) {
+      state.items[index].quantityWTB++
+    },
+    // removeItem(state, index) {
+    //   state.items.splice(index, 1)
+    // }
   }
 }
