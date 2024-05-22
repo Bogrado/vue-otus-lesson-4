@@ -2,6 +2,7 @@
 import SvgLikeIt from '@/components/UI/svg/SvgLikeIt.vue'
 import SvgStar from '@/components/UI/svg/SvgStar.vue'
 import SvgAdd from '@/components/UI/svg/SvgAdd.vue'
+import SvgChecked from '@/components/UI/svg/SvgChecked.vue'
 
 defineProps({
   item: {
@@ -9,6 +10,8 @@ defineProps({
     required: true
   }
 })
+
+defineEmits(['onClickAdd', 'onClickRemove'])
 
 </script>
 
@@ -52,8 +55,14 @@ defineProps({
           </div>
 
           <svg-add
+            v-if="!item.isAdded"
             class="cursor-pointer hover:stroke-slate-400"
             @click="$emit('onClickAdd', item)"
+          />
+          <svg-checked
+            v-if="item.isAdded"
+            class="cursor-pointer hover:stroke-slate-400"
+            @click="$emit('onClickRemove', item)"
           />
         </div>
       </div>

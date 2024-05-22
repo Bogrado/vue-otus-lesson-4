@@ -8,7 +8,10 @@ const ItemsList = computed(() => index.getters.getItemsList)
 const addToCart = (item) => {
   item.isAdded = true
   index.dispatch('addToCart', item)
-  console.log(index.getters.getCartItemsList)
+}
+const removeFromCart = (item) => {
+  item.isAdded = false
+  index.dispatch('removeFromCart', item)
 }
 </script>
 
@@ -16,7 +19,8 @@ const addToCart = (item) => {
   <div class="grid grid-cols-4 gap-4 mt-10">
     <AppCard
       v-for="item in ItemsList" :key="item.id" :item="item"
-      @onClickAdd="addToCart"
+      @on-click-add="addToCart"
+      @on-click-remove="removeFromCart"
     />
   </div>
 </template>

@@ -7,15 +7,18 @@ export default {
   getters: {
     getCartItemsList(state) {
       return state.items
+    },
+    itemIsAdded(state) {
+      return (id) => state.items.find((el) => el.id === id).isAdded
     }
   },
   actions: {
     addToCart({ commit }, item) {
       commit('addItem', item)
     },
-    // removeFromCart({ commit }, index) {
-    //   commit('removeItem', index)
-    // }
+    removeFromCart({ commit }, item) {
+      commit('removeItem', item)
+    }
   },
   mutations: {
     addItem(state, item) {
@@ -30,8 +33,19 @@ export default {
     increaseQuantity(state, index) {
       state.items[index].quantityWTB++
     },
-    // removeItem(state, index) {
-    //   state.items.splice(index, 1)
-    // }
+    decreaseQuantity(state, index) {
+      if (state.items[index].quantityWTB === 1) {
+        this.commit('removeItem', state.items[index])
+        return
+      }
+      state.items[index].quantityWTB--
+    },
+    removeItem(state, item) {
+      // item.isAdded = false
+      this.commit('unmarkAsAdded', item)
+      state.items = state.items.filter((el) => el.id !== item.id)
+    },
+
+
   }
 }

@@ -35,7 +35,7 @@ export default {
       } finally {
         commit('setLoading', false)
       }
-    },
+    }
   },
   mutations: {
     setItems(state, items) {
@@ -48,6 +48,20 @@ export default {
           quantityWTB: 0 // for cart quantity want to buy
         }
       })
+    },
+
+
+    unmarkAsAdded(state, item) {
+      // state.items = state.items.map((el) => { // заманчиво, но нет
+      //   if (el.id === item.id) {
+      //     el.isAdded = false
+      //   }
+      //   return el
+      // })
+      const element = state.items.find((el) => el.id === item.id)
+      if (element) {
+        element.isAdded = false
+      }
     }
   }
 }
