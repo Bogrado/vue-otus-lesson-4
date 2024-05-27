@@ -2,6 +2,7 @@
 import SvgCross from '@/components/UI/svg/SvgCross.vue'
 import AppButton from '@/components/UI/base/AppButton.vue'
 import { ref } from 'vue'
+import AppPreloader from '@/components/UI/AppPreloader.vue'
 
 const isOpen = ref(false)
 
@@ -18,7 +19,11 @@ const isOpen = ref(false)
       class="modal-content relative p-5 max-w-xl bg-[#fff] border border-gray-200 rounded-lg shadow z-999 overflow-hidden"
       @click.stop="">
       <div class="modal-header flex justify-between pb-5">
-        <span class="modal-title text-xl font-bold"> Тайтл </span>
+        <span class="modal-title text-xl font-bold">
+          <slot name="modalTitle">
+            Title
+          </slot>
+        </span>
         <app-button @click="isOpen = false">
           <svg-cross />
         </app-button>
@@ -26,6 +31,7 @@ const isOpen = ref(false)
       <div class="modal-body">
         <slot name="body">
           default
+          <app-preloader/>
         </slot>
       </div>
     </div>

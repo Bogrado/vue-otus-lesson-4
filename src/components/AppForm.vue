@@ -8,6 +8,9 @@ import AppCreateOrderForm from '@/components/UI/AppCreateOrderForm.vue'
 <template>
   <app-main-header>Форма</app-main-header>
   <app-modal>
+    <template #modalTitle>
+      Заполните форму
+    </template>
     <template #body>
       <app-create-order-form />
     </template>
