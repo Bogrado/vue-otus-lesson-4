@@ -7,6 +7,7 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import { index } from '@/store'
 import debounce from 'lodash.debounce'
+import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
 
 defineProps({
   loadingStatus: {
@@ -42,7 +43,7 @@ watch([sortBy, searchValue], fetchItems)
 
 <template>
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold">Товары</h2>
+    <app-main-header>Товары</app-main-header>
 
     <div class="flex gap-4">
       <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />
