@@ -36,6 +36,13 @@ const OpenDrawer = () => {
 
     <ul class="flex items-center gap-10">
 
+      <router-link to="/form">
+        <li class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white">
+          <svg-hearth />
+          <span>Форма</span>
+        </li>
+      </router-link>
+
       <router-link to="/favorites">
         <li class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white">
           <svg-hearth />

@@ -29,7 +29,7 @@ defineEmits(['onClickRemove'])
           </div>
         </div>
         <svg-cross
-          class=" hover:opacity-100 transition cursor-pointer w-4 h-4 hover:fill-gray-800 mb-1"
+          class=" mb-1"
           @click="$emit('onClickRemove', item)"
         />
       </div>
