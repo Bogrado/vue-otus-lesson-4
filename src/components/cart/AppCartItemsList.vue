@@ -1,7 +1,7 @@
 <script setup>
-import AppCartItem from '@/components/AppCartItem.vue'
+import AppCartItem from '@/components/cart/AppCartItem.vue'
 import { computed } from 'vue'
-import { index } from '@/store'
+import { index } from '@/store/index.js'
 
 const cartItems = computed(() => index.getters.getCartItemsList)
 

@@ -7,6 +7,7 @@ import { computed } from 'vue'
 const isDrawerOpen = computed(() => index.getters.isOpen)
 const loadingStatus = computed(() => index.getters.getLoading)
 const totalPrice = computed(() => index.getters.getTotalPrice)
+const cartIsEmpty = computed(() => index.getters.getCartItemsList.length === 0)
 
 const changeVisibility = () => {
   index.dispatch('changeVisibility')
@@ -17,6 +18,7 @@ const changeVisibility = () => {
   <app-drawer
     v-if="isDrawerOpen"
     :totalPrice="totalPrice"
+    :cartIsEmpty="cartIsEmpty"
   />
 
   <div class="w-4/5 m-auto bg-white rounded-xl shadow-2xl mt-14">
