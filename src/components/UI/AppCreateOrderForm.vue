@@ -3,6 +3,13 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, email, numeric } from '@vuelidate/validators'
 import { reactive, ref } from 'vue'
 
+defineProps({
+  loadingStatus: {
+    type: Boolean,
+    required: false
+  }
+})
+
 
 const user = reactive({
   isAgreed: false,
