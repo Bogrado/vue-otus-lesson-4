@@ -25,7 +25,7 @@ const rules = {
     email: { required, email },
     phone: { required, numeric, length: (value) => value.length === 11 }
   },
-  firstName: { required, length: (value) => value.length >= 3 },
+  firstName: { required, length: (value) => value.length >= 3 || value === ('ян' || 'Ян') },
   lastName: { required, length: (value) => value.length >= 3 },
   address: {
     city: { required },
