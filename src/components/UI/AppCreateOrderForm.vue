@@ -5,13 +5,35 @@ import { reactive, ref } from 'vue'
 
 
 const user = reactive({
-  email: '',
-  phone: ''
+  isAgreed: false,
+  firstName: '',
+  lastName: '',
+  contacts: {
+    email: '',
+    phone: ''
+  },
+  address: {
+    city: '',
+    street: '',
+    house: '',
+    flat: ''
+  }
 })
 
 const rules = {
-  email: { required, email },
-  phone: { required, numeric, length: (value) => value.length === 11 }
+  contacts: {
+    email: { required, email },
+    phone: { required, numeric, length: (value) => value.length === 11 }
+  },
+  firstName: { required, length: (value) => value.length >= 3 },
+  lastName: { required, length: (value) => value.length >= 3 },
+  address: {
+    city: { required },
+    street: { required, length: (value) => value.length >= 3 },
+    house: { required },
+    flat: { required, numeric }
+  },
+  isAgreed: { required: (value) => !!value }
 }
 
 const v$ = useVuelidate(rules, user)
@@ -26,8 +48,8 @@ const onSubmit = async () => {
     showError.value = false
     return
   }
-    console.log(result)
-    showError.value = true
+  console.log(result)
+  showError.value = true
 
 }
 
@@ -35,93 +57,142 @@ const onSubmit = async () => {
 
 <template>
   <form class="max-w-md mx-auto bg-[#1F2937] p-5 rounded-b-lg">
-    <div class="form-item flex">
-      <div class="m-2.5" :class="{ errorInput: v$.email.$error }">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 ">
+      <div>
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Электронная почта
+          Имя
         </label>
         <input
-          v-model="user.email"
-          :class="{ 'dark:border-red-600': v$.email.$error }"
-          @change="v$.email.$touch()"
-          type="email"
-          id="email"
+          v-model="user.firstName"
+          :class="{ 'dark:border-red-600': v$.firstName.$error }"
+          @change="v$.firstName.$touch()"
+          type="text"
+          id="firstName"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-          placeholder="name@flowbite.com"
+          placeholder="Иван"
           required
         />
       </div>
-      <div class="m-2.5">
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Фамилия
+        </label>
+        <input
+          v-model="user.lastName"
+          :class="{ 'dark:border-red-600': v$.lastName.$error }"
+          @change="v$.lastName.$touch()"
+          type="text"
+          id="lastName"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          placeholder="Иванов"
+          required
+        />
+      </div>
+      <div>
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Номер телефона
         </label>
         <input
-          v-model="user.phone"
-          :class="{ 'dark:border-red-600': v$.phone.$error }"
-          @change="v$.phone.$touch()"
+          v-model="user.contacts.phone"
+          :class="{ 'dark:border-red-600': v$.contacts.phone.$error }"
+          @change="v$.contacts.phone.$touch()"
           id="telephone"
+          type="tel"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="88005553535"
           required
         />
       </div>
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Емейл
+        </label>
+        <input
+          v-model="user.contacts.email"
+          :class="{ 'dark:border-red-600': v$.contacts.email.$error }"
+          @change="v$.contacts.email.$touch()"
+          id="email"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          placeholder="gTn9x@example.com"
+          required
+        />
+      </div>
     </div>
-    <!--    <div class=" flex">-->
-    <!--      <div class="m-2.5">-->
-    <!--        <label for="lastName"-->
-    <!--               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"-->
-    <!--        >-->
-    <!--          Фамилия-->
-    <!--        </label>-->
-    <!--        <input-->
-    <!--          v-model="user.lastName"-->
-    <!--          type="text"-->
-    <!--          id="lastName"-->
-    <!--          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"-->
-    <!--          placeholder="Fakov"-->
-    <!--          required-->
-    <!--        />-->
-    <!--      </div>-->
-    <!--      <div class="m-2.5">-->
-    <!--        <label-->
-    <!--          for="firstName"-->
-    <!--          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"-->
-    <!--        >-->
-    <!--          Имя-->
-    <!--        </label>-->
-    <!--        <input-->
-    <!--          v-model="user.firstName"-->
-    <!--          type="text"-->
-    <!--          id="firstName"-->
-    <!--          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"-->
-    <!--          placeholder="Ivan"-->
-    <!--          required-->
-    <!--        />-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="">-->
-    <!--      <div class="m-2.5">-->
-    <!--        <label-->
-    <!--          for="city"-->
-    <!--          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">-->
-    <!--          Выберите ваш город-->
-    <!--        </label>-->
-    <!--        <select-->
-    <!--          v-model="user.city"-->
-    <!--          id="city"-->
-    <!--          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
-
-    <!--          <option>Москва</option>-->
-    <!--          <option>Казань</option>-->
-    <!--          <option>Омск</option>-->
-    <!--          <option>Красноярск</option>-->
-    <!--        </select>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <div>
+      <label
+        for="city"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Выберите ваш город
+      </label>
+      <select
+        v-model="user.address.city"
+        :class="{ 'dark:border-red-600': v$.address.city.$error }"
+        @change="v$.address.city.$touch()"
+        id="city"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option selected disabled>Выберите город</option>
+        <option>Москва</option>
+        <option>Казань</option>
+        <option>Омск</option>
+        <option>Красноярск</option>
+      </select>
+    </div>
+    <div class="flex justify-between">
+      <div>
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Улица
+        </label>
+        <input
+          v-model="user.address.street"
+          :class="{ 'dark:border-red-600': v$.address.street.$error }"
+          @change="v$.address.street.$touch()"
+          id="street"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          placeholder="Пушкина"
+          required
+        />
+      </div>
+      <div class="w-1/6">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Дом
+        </label>
+        <input
+          v-model="user.address.house"
+          :class="{ 'dark:border-red-600': v$.address.house.$error }"
+          @change="v$.address.house.$touch()"
+          id="house"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          required
+        />
+      </div>
+      <div class="w-1/6">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Квартира
+        </label>
+        <input
+          v-model="user.address.flat"
+          :class="{ 'dark:border-red-600': v$.address.flat.$error }"
+          @change="v$.address.flat.$touch()"
+          id="flat"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          required
+        />
+      </div>
+    </div>
     <div class="flex items-start mb-5">
       <div class="flex items-center h-5">
         <input
@@ -139,6 +210,7 @@ const onSubmit = async () => {
     </div>
     <div class="flex items-center justify-between">
       <button
+        :class="{ 'cursor-not-allowed opacity-50 dark:focus:ring-0 dark:focus:ring-offset-0 dark:hover:bg-slate-600': !user.isAgreed }"
         @click.prevent="onSubmit"
         type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
