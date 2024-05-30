@@ -47,6 +47,10 @@ export default {
       state.items = state.items.filter((el) => el.id !== item.id)
     },
 
+    clearCart(state) {
+      state.items.length = 0
+    },
+
 
   }
 }

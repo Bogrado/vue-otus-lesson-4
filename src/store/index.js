@@ -5,6 +5,7 @@ import loading from '@/store/loading.js'
 import sorting from '@/store/sorting.js'
 import search from '@/store/search.js'
 import cart from '@/store/cart.js'
+import createOrder from '@/store/createOrder.js'
 
 export const index = createStore({
   modules: {
@@ -13,6 +14,7 @@ export const index = createStore({
     loading,
     sorting,
     search,
-    cart
+    cart,
+    createOrder
   }
 })

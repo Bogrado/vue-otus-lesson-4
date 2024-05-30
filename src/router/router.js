@@ -14,11 +14,6 @@ export const router = createRouter(
         component: () => import('@/pages/TheFavorites.vue')
       },
       {
-        path: '/form',
-        name: 'form',
-        component: () => import('@/components/AppForm.vue')
-      },
-      {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
         component: () => import('@/pages/TheError.vue')

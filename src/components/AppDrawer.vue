@@ -5,6 +5,8 @@ import AppCartItemsList from '@/components/cart/AppCartItemsList.vue'
 import { computed } from 'vue'
 import AppButton from '@/components/UI/base/AppButton.vue'
 import AppCartInfo from '@/components/cart/AppCartInfo.vue'
+import AppCreateOrderForm from '@/components/UI/AppCreateOrderForm.vue'
+import AppModal from '@/components/UI/AppModal.vue'
 
 const props = defineProps({
   totalPrice: {
@@ -23,6 +25,12 @@ const closeDrawer = () => {
 }
 
 const cartButtonDisabled = computed(() => props.cartIsEmpty)
+
+const placeAnOrder = () => {
+  if (!props.cartIsEmpty) {
+    index.dispatch('changeFormVisibility', true)
+  }
+}
 </script>
 
 <template>
@@ -30,7 +38,7 @@ const cartButtonDisabled = computed(() => props.cartIsEmpty)
   <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-20 p-10">
     <app-drawer-head @close-drawer="closeDrawer" />
 
-    <template v-if="!cartIsEmpty" >
+    <template v-if="!cartIsEmpty">
       <app-cart-items-list />
 
       <div class="flex flex-col gap-4 mt-7">
@@ -39,19 +47,28 @@ const cartButtonDisabled = computed(() => props.cartIsEmpty)
           <div class="flex-1 border-b border-dashed"></div>
           <b>{{ totalPrice }}</b>
         </div>
-<!--        <div class="flex gap-2">-->
-<!--          <span>На пиво 5%:</span>-->
-<!--          <div class="flex-1 border-b border-dashed"></div>-->
-<!--          <b>процент руб.</b>-->
-<!--        </div>-->
+        <!--        <div class="flex gap-2">-->
+        <!--          <span>На пиво 5%:</span>-->
+        <!--          <div class="flex-1 border-b border-dashed"></div>-->
+        <!--          <b>процент руб.</b>-->
+        <!--        </div>-->
 
         <app-button
+          @click="placeAnOrder"
           :disabled="cartButtonDisabled"
           class="mt-4 bg-gray-800 w-full rounded-2xl py-3 text-white hover:bg-gray-600 transition active:bg-lime-700 disabled:bg-slate-300 cursor-pointer">
           Создать заказ
         </app-button>
 
       </div>
+      <app-modal>
+        <template #modalTitle>
+          Заполните форму
+        </template>
+        <template #body>
+          <app-create-order-form />
+        </template>
+      </app-modal>
     </template>
 
     <div
@@ -65,12 +82,12 @@ const cartButtonDisabled = computed(() => props.cartIsEmpty)
         image-url="/package-icon.png"
       />
 
-<!--      <app-cart-info-->
-<!--        v-if="orderId"-->
-<!--        title="Заказ оформлен"-->
-<!--        :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"-->
-<!--        image-url="/order-success-icon.png"-->
-<!--      />-->
+      <!--      <app-cart-info-->
+      <!--        v-if="orderId"-->
+      <!--        title="Заказ оформлен"-->
+      <!--        :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"-->
+      <!--        image-url="/order-success-icon.png"-->
+      <!--      />-->
     </div>
   </div>
 </template>

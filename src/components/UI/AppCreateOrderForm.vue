@@ -2,6 +2,7 @@
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, numeric } from '@vuelidate/validators'
 import { reactive, ref } from 'vue'
+import { index } from '@/store'
 
 defineProps({
   loadingStatus: {
@@ -51,13 +52,13 @@ const onSubmit = async () => {
   v$.value.$touch()
   const result = await v$.value.$validate()
   if (result) {
-    console.log(user)
-    showError.value = false
+    await index.dispatch('setOrder', user)
+    await index.dispatch('createOrder')
+    await index.dispatch('fetchItems')
     return
   }
   console.log(result)
   showError.value = true
-
 }
 
 </script>
