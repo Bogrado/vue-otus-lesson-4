@@ -48,8 +48,8 @@ const clearOrder = () => {
     <app-drawer-head @close-drawer="closeDrawer" />
 
     <template v-if="!cartIsEmpty">
-      <div v-auto-animate>
-        <app-cart-items-list />
+      <div>
+        <app-cart-items-list v-auto-animate />
 
         <div class="flex flex-col gap-4 mt-7">
           <div class="flex gap-2">
