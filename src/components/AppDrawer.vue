@@ -25,11 +25,19 @@ const closeDrawer = () => {
 }
 
 const cartButtonDisabled = computed(() => props.cartIsEmpty)
+const orderId = computed(() => index.getters.getOrderId
+)
 
 const placeAnOrder = () => {
-  if (!props.cartIsEmpty) {
+  if (!props.cartIsEmpty)
     index.dispatch('changeFormVisibility', true)
-  }
+
+}
+
+const clearOrder = () => {
+  index.commit('setOrder', {})
+  closeDrawer()
+  console.log(index.getters.getOrder)
 }
 </script>
 
@@ -61,7 +69,7 @@ const placeAnOrder = () => {
         </app-button>
 
       </div>
-      <app-modal>
+      <app-modal >
         <template #modalTitle>
           Заполните форму
         </template>
@@ -75,19 +83,27 @@ const placeAnOrder = () => {
       v-if="!totalPrice"
       class="flex h-full items-center"
     >
+      <div class="flex flex-col items-center" v-if="orderId">
+        <app-cart-info
+          v-if="orderId"
+          title="Заказ оформлен"
+          :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"
+          image-url="/order-success-icon.png"
+        />
+        <app-button
+          @click="clearOrder"
+          class="mt-4 bg-gray-800 w-1/3 rounded-2xl py-3 text-white hover:bg-gray-600 transition active:bg-lime-700 disabled:bg-slate-300 cursor-pointer">
+          OK
+        </app-button>
+      </div>
       <app-cart-info
-        v-if="!totalPrice"
+        v-if="!totalPrice && !orderId"
         title="Empty"
         description="Корзина пуста, добавьте товары"
         image-url="/package-icon.png"
       />
 
-      <!--      <app-cart-info-->
-      <!--        v-if="orderId"-->
-      <!--        title="Заказ оформлен"-->
-      <!--        :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`"-->
-      <!--        image-url="/order-success-icon.png"-->
-      <!--      />-->
+
     </div>
   </div>
 </template>

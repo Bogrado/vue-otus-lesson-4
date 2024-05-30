@@ -23,7 +23,6 @@ const searchValue = computed(() => index.getters.getSearchValue)
 
 const changeSortBy = (sortBy) => {
   index.dispatch('changeSortBy', sortBy)
-  console.log(index.getters.getSortBy)
 }
 
 const fetchItems = async () => {
