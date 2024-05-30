@@ -8,6 +8,7 @@ import { computed, onMounted, watch } from 'vue'
 import { index } from '@/store'
 import debounce from 'lodash.debounce'
 import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
+import {vAutoAnimate} from '@formkit/auto-animate'
 
 defineProps({
   loadingStatus: {

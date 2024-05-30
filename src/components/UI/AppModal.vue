@@ -15,7 +15,6 @@ const changeFormVisibility = (bool) => {
 
 <template>
 
-  <transition name="modal">
     <div
       v-if="isOpen"
       class="modal__wrapper flex justify-center items-center fixed inset-0 z-998 bg-black bg-opacity-70"
@@ -41,30 +40,5 @@ const changeFormVisibility = (bool) => {
         </div>
       </div>
     </div>
-  </transition>
 </template>
 
-<style scoped lang="scss">
-
-.modal-enter {
-  opacity: 0
-}
-
-.modal-leave-active {
-  opacity: 0
-}
-
-.modal-enter .modal-content,
-.modal-leave-active .modal-content {
-  transform: scale(1.2)
-}
-
-.modal__wrapper {
-  transition: opacity .3s ease
-}
-
-.modal-content {
-  transition: all .3s ease
-}
-
-</style>

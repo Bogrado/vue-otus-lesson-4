@@ -61,5 +61,3 @@ const OpenDrawer = () => {
     </ul>
   </header>
 </template>
-
-<style scoped></style>

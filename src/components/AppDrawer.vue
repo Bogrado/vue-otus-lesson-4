@@ -7,6 +7,7 @@ import AppButton from '@/components/UI/base/AppButton.vue'
 import AppCartInfo from '@/components/cart/AppCartInfo.vue'
 import AppCreateOrderForm from '@/components/UI/AppCreateOrderForm.vue'
 import AppModal from '@/components/UI/AppModal.vue'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
 const props = defineProps({
   totalPrice: {
@@ -47,36 +48,38 @@ const clearOrder = () => {
     <app-drawer-head @close-drawer="closeDrawer" />
 
     <template v-if="!cartIsEmpty">
-      <app-cart-items-list />
+      <div v-auto-animate>
+        <app-cart-items-list />
 
-      <div class="flex flex-col gap-4 mt-7">
-        <div class="flex gap-2">
-          <span>Итого:</span>
-          <div class="flex-1 border-b border-dashed"></div>
-          <b>{{ totalPrice }}</b>
+        <div class="flex flex-col gap-4 mt-7">
+          <div class="flex gap-2">
+            <span>Итого:</span>
+            <div class="flex-1 border-b border-dashed"></div>
+            <b>{{ totalPrice }}</b>
+          </div>
+          <!--        <div class="flex gap-2">-->
+          <!--          <span>На пиво 5%:</span>-->
+          <!--          <div class="flex-1 border-b border-dashed"></div>-->
+          <!--          <b>процент руб.</b>-->
+          <!--        </div>-->
+
+          <app-button
+            @click="placeAnOrder"
+            :disabled="cartButtonDisabled"
+            class="mt-4 bg-gray-800 w-full rounded-2xl py-3 text-white hover:bg-gray-600 transition active:bg-lime-700 disabled:bg-slate-300 cursor-pointer">
+            Создать заказ
+          </app-button>
+
         </div>
-        <!--        <div class="flex gap-2">-->
-        <!--          <span>На пиво 5%:</span>-->
-        <!--          <div class="flex-1 border-b border-dashed"></div>-->
-        <!--          <b>процент руб.</b>-->
-        <!--        </div>-->
-
-        <app-button
-          @click="placeAnOrder"
-          :disabled="cartButtonDisabled"
-          class="mt-4 bg-gray-800 w-full rounded-2xl py-3 text-white hover:bg-gray-600 transition active:bg-lime-700 disabled:bg-slate-300 cursor-pointer">
-          Создать заказ
-        </app-button>
-
+        <app-modal>
+          <template #modalTitle>
+            Заполните форму
+          </template>
+          <template #body>
+            <app-create-order-form />
+          </template>
+        </app-modal>
       </div>
-      <app-modal >
-        <template #modalTitle>
-          Заполните форму
-        </template>
-        <template #body>
-          <app-create-order-form />
-        </template>
-      </app-modal>
     </template>
 
     <div
