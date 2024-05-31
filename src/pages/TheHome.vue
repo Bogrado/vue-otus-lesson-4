@@ -7,6 +7,8 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import { index } from '@/store'
 import debounce from 'lodash.debounce'
+import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
+import {vAutoAnimate} from '@formkit/auto-animate'
 
 defineProps({
   loadingStatus: {
@@ -22,7 +24,6 @@ const searchValue = computed(() => index.getters.getSearchValue)
 
 const changeSortBy = (sortBy) => {
   index.dispatch('changeSortBy', sortBy)
-  console.log(index.getters.getSortBy)
 }
 
 const fetchItems = async () => {
@@ -42,7 +43,7 @@ watch([sortBy, searchValue], fetchItems)
 
 <template>
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold">Товары</h2>
+    <app-main-header>Товары</app-main-header>
 
     <div class="flex gap-4">
       <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />

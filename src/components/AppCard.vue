@@ -2,13 +2,17 @@
 import SvgLikeIt from '@/components/UI/svg/SvgLikeIt.vue'
 import SvgStar from '@/components/UI/svg/SvgStar.vue'
 import SvgAdd from '@/components/UI/svg/SvgAdd.vue'
+import SvgChecked from '@/components/UI/svg/SvgChecked.vue'
 
 defineProps({
   item: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
+
+defineEmits(['onClickAdd', 'onClickRemove'])
+
 </script>
 
 <template>
@@ -29,18 +33,18 @@ defineProps({
               <svg-star class="mr-1 w-3 h-3" />
 
               <div>
-                <span>{{ item.rating.rate }}</span>
-                <span class="ml-2">({{ item.rating.count }})</span>
+                <span>{{ item.rating? item.rating.rate : 0 }}</span>
+                <span class="ml-2">({{item.rating? item.rating.count : 0 }})</span>
               </div>
             </div>
           </div>
         </div>
 
-        <img class="flex flex-grow flex-col" :src="item.image" alt="item" />
+        <img class="flex flex-grow flex-col" :src="item.image ? item.image : 'https://placehold.co/230x310'" alt="item" />
       </div>
 
-      <div class="footer">
-        <p>{{ item.title }}</p>
+      <div class="footer mt-2">
+        <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
 
         <div
           class="flex justify-between items-center mt-5 bg-gray-700 p-4 rounded-md cursor-default"
@@ -50,11 +54,18 @@ defineProps({
             <b class="mt-2 text-white">{{ item.price }} Руб.</b>
           </div>
 
-          <svg-add class="cursor-pointer hover:stroke-slate-400" />
+          <svg-add
+            v-if="!item.isAdded"
+            class="cursor-pointer hover:stroke-slate-400"
+            @click="$emit('onClickAdd', item)"
+          />
+          <svg-checked
+            v-if="item.isAdded"
+            class="cursor-pointer hover:stroke-slate-400"
+            @click="$emit('onClickRemove', item)"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped></style>

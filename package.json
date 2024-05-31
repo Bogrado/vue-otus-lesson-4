@@ -12,9 +12,12 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "axios": "^1.6.8",
     "lodash.debounce": "^4.0.8",
     "vue": "^3.4.21",
+    "vue-router": "^4.3.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -27,6 +30,7 @@
     "eslint-plugin-vue": "^9.23.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
+    "sass": "^1.77.2",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.8"
   }
