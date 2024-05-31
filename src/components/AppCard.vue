@@ -7,8 +7,8 @@ import SvgChecked from '@/components/UI/svg/SvgChecked.vue'
 defineProps({
   item: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 
 defineEmits(['onClickAdd', 'onClickRemove'])
@@ -33,18 +33,18 @@ defineEmits(['onClickAdd', 'onClickRemove'])
               <svg-star class="mr-1 w-3 h-3" />
 
               <div>
-                <span>{{ item.rating.rate }}</span>
-                <span class="ml-2">({{ item.rating.count }})</span>
+                <span>{{ item.rating? item.rating.rate : 0 }}</span>
+                <span class="ml-2">({{item.rating? item.rating.count : 0 }})</span>
               </div>
             </div>
           </div>
         </div>
 
-        <img class="flex flex-grow flex-col" :src="item.image" alt="item" />
+        <img class="flex flex-grow flex-col" :src="item.image ? item.image : 'https://placehold.co/230x310'" alt="item" />
       </div>
 
       <div class="footer">
-        <p>{{ item.title }}</p>
+        <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
 
         <div
           class="flex justify-between items-center mt-5 bg-gray-700 p-4 rounded-md cursor-default"
