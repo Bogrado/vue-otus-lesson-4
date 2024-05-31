@@ -65,7 +65,7 @@ export default {
         setTimeout(() => {
           commit('changeVisibility')
           commit('setOrder', {})
-        }, 3000)
+        }, 5000)
         console.log(this.getters.getOrder)
       } catch (error) {
         console.log(error)

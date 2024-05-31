@@ -43,7 +43,7 @@ defineEmits(['onClickAdd', 'onClickRemove'])
         <img class="flex flex-grow flex-col" :src="item.image ? item.image : 'https://placehold.co/230x310'" alt="item" />
       </div>
 
-      <div class="footer">
+      <div class="footer mt-2">
         <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
 
         <div

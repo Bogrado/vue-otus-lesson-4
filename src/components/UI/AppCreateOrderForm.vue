@@ -66,7 +66,7 @@ const onSubmit = async () => {
 <template>
   <form class="max-w-md mx-auto bg-[#1F2937] p-5 rounded-b-lg">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 ">
-      <div>
+      <div class="">
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
@@ -134,10 +134,10 @@ const onSubmit = async () => {
         />
       </div>
     </div>
-    <div>
+    <div class="gap-2.5">
       <label
         for="city"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        class=" mt-2.5 block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         Выберите ваш город
       </label>
       <select
@@ -153,10 +153,10 @@ const onSubmit = async () => {
         <option>Красноярск</option>
       </select>
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-between gap-2.5 mt-2.5">
       <div>
         <label
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class=" block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Улица
         </label>
@@ -201,7 +201,7 @@ const onSubmit = async () => {
         />
       </div>
     </div>
-    <div class="flex items-start mb-5">
+    <div class="flex items-start mt-2.5 mb-5">
       <div class="flex items-center h-5">
         <input
           v-model="user.isAgreed"
@@ -212,7 +212,7 @@ const onSubmit = async () => {
           required
         />
       </div>
-      <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Я согласен с условиями <a
+      <label for="terms" class=" ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Я согласен с условиями <a
         href="#" class="text-blue-600 hover:underline dark:text-blue-500">Условия и политика
         конфиденциальности</a></label>
     </div>
