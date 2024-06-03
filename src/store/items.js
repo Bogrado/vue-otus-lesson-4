@@ -60,22 +60,10 @@ export default {
 
 
     unmarkAsAdded(state, item) {
-      // state.items = state.items.map((el) => { // заманчиво, но нет
-      //   if (el.id === item.id) {
-      //     el.isAdded = false
-      //   }
-      //   return el
-      // })
       const element = state.items.find((el) => el.id === item.id)
       if (element) {
         element.isAdded = false
       }
     },
-    // checkCart(state, item) {
-    //   const element = state.items.find((el) => el.id === item.id)
-    //   if (element) {
-    //     element.isAdded = true
-    //   }
-    // }
   }
 }

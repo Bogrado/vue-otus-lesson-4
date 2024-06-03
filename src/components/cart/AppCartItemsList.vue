@@ -7,7 +7,15 @@ const cartItems = computed(() => index.getters.getCartItemsList)
 
 const removeFromCart = (item) => {
   index.dispatch('removeFromCart', item)
-  console.log(index.getters.getItemsList)
+}
+
+const decreaseQuantity = (item) => {
+  index.dispatch('decreaseQuantity', item)
+}
+
+const addToCart = (item) => {
+  item.isAdded = true
+  index.dispatch('addToCart', item)
 }
 </script>
 
@@ -18,6 +26,8 @@ const removeFromCart = (item) => {
       :key="item.id"
       :item="item"
       @on-click-remove="removeFromCart"
+      @on-click-decrease="decreaseQuantity"
+      @onClickAdd="addToCart"
       v-auto-animate
     />
   </div>

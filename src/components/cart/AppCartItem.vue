@@ -1,5 +1,6 @@
 <script setup>
 import SvgCross from '@/components/UI/svg/SvgCross.vue'
+import AppSelectQty from '@/components/AppSelectQty.vue'
 
 defineProps({
   item: {
@@ -7,7 +8,7 @@ defineProps({
     required: true
   }
 })
-defineEmits(['onClickRemove'])
+defineEmits(['onClickRemove', 'onClickAdd', 'onClickDecrease'])
 
 </script>
 
@@ -23,15 +24,26 @@ defineEmits(['onClickRemove'])
             <span class="text-slate-500"> Цена:</span>
             <b>{{ item.price }}</b>
           </div>
-          <div class="flex gap-2 items-center text-slate-600 text-sm mr-6">
+          <div class="flex gap-2 justify-between items-center text-slate-600 text-sm mr-6">
             <span class="text-slate-500"> Количество:</span>
-            <b>{{ item.quantityWTB }}</b>
+            <app-select-qty
+              class="px-1"
+              classes="w-4 h-4"
+              :item="item"
+              @onClickAdd="$emit('onClickAdd', item)"
+              @onClickRemove="$emit('onClickRemove', item)"
+              @onClickDecrease="$emit('onClickDecrease', item)"
+            />
           </div>
+
         </div>
-        <svg-cross
-          class=" mb-1"
-          @click="$emit('onClickRemove', item)"
-        />
+        <div class="flex flex-col items-end gap-2">
+          <svg-cross
+
+            class="mb-1 mr-1"
+            @click="$emit('onClickRemove', item)"
+          />
+        </div>
       </div>
     </div>
   </div>

@@ -10,19 +10,29 @@ const addToCart = (item) => {
   index.dispatch('addToCart', item)
 }
 const removeFromCart = (item) => {
-  item.isAdded = false
   index.dispatch('removeFromCart', item)
+  if (index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB === 0) {
+    item.isAdded = false
+  }
 }
+
+const decreaseQuantity = (item) => {
+  index.dispatch('decreaseQuantity', item)
+}
+
 </script>
 
 <template>
-  <div class="grid grid-cols-4 gap-4 mt-10">
+  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10">
     <AppCard
       v-for="item in ItemsList" :key="item.id" :item="item"
       @on-click-add="addToCart"
       @on-click-remove="removeFromCart"
+      @on-click-decrease="decreaseQuantity"
     />
   </div>
 </template>
 
 <style scoped></style>
+
+<!--@on-click-increase="console.log(item)"-->

@@ -19,6 +19,9 @@ export default {
     },
     removeFromCart({ commit }, item) {
       commit('removeItem', item)
+    },
+    decreaseQuantity({ commit }, item) {
+      commit('decreaseQuantity', item)
     }
   },
   mutations: {
@@ -34,22 +37,25 @@ export default {
     increaseQuantity(state, index) {
       state.cartItems[index].quantityWTB++
     },
-    decreaseQuantity(state, index) {
-      if (state.cartItems[index].quantityWTB === 1) {
-        this.commit('removeItem', state.cartItems[index])
-        return
+    decreaseQuantity(state, item) {
+      const element = state.cartItems.find((el) => el.id === item.id)
+      if (element.quantityWTB > 1) {
+        element.quantityWTB--
       }
-      state.cartItems[index].quantityWTB--
+      else {
+        this.commit('removeItem', item)
+        state.cartItems = state.cartItems.filter((el) => el.id !== item.id)
+      }
     },
     removeItem(state, item) {
-      // item.isAdded = false
       this.commit('unmarkAsAdded', item)
       state.cartItems = state.cartItems.filter((el) => el.id !== item.id)
+
     },
 
     clearCart(state) {
       state.cartItems.length = 0
-    },
+    }
 
 
   }

@@ -1,4 +1,6 @@
 <script setup>
+import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
+
 const emit = defineEmits(['closeDrawer'])
 </script>
 
@@ -28,7 +30,7 @@ const emit = defineEmits(['closeDrawer'])
         stroke-linejoin="round"
       />
     </svg>
-    <h2 class="text-2xl font-bold">Корзина</h2>
+    <app-main-header class="text-2xl font-bold">Корзина</app-main-header>
   </div>
 </template>
 

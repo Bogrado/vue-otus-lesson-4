@@ -57,11 +57,6 @@ const clearOrder = () => {
             <div class="flex-1 border-b border-dashed"></div>
             <b>{{ totalPrice }}</b>
           </div>
-          <!--        <div class="flex gap-2">-->
-          <!--          <span>На пиво 5%:</span>-->
-          <!--          <div class="flex-1 border-b border-dashed"></div>-->
-          <!--          <b>процент руб.</b>-->
-          <!--        </div>-->
 
           <app-button
             @click="placeAnOrder"
@@ -105,7 +100,6 @@ const clearOrder = () => {
         description="Корзина пуста, добавьте товары"
         image-url="/package-icon.png"
       />
-
 
     </div>
   </div>

@@ -22,7 +22,7 @@ const OpenDrawer = () => {
 
 <template>
   <header
-    class="px-10 py-8 top-0 z-20 flex items-center justify-between p-3 border-b bg-gray-800 border-gray-200 rounded-t-xl"
+    class="sticky bottom-0 px-10 py-8 top-0  z-10 flex items-center justify-between p-3 border-b bg-gray-800 border-gray-200 rounded-t-xl"
   >
     <router-link to="/">
       <div class="flex items-center gap-4 text-white">
@@ -51,12 +51,12 @@ const OpenDrawer = () => {
       </router-link>
 
       <li
-        class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white"
+        class="flex items-center gap-3 text-slate-500 cursor-pointer hover:text-white "
         @click="OpenDrawer"
       >
         <svg-cart />
 
-        <b>{{ totalPrice }}</b>
+        <b class="w-24">{{ totalPrice }} ₽</b>
       </li>
     </ul>
   </header>
