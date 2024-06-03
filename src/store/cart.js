@@ -1,16 +1,16 @@
 export default {
   state() {
     return {
-      items: [],
+      cartItems: [],
       tax: 0.05
     }
   },
   getters: {
     getCartItemsList(state) {
-      return state.items
+      return state.cartItems
     },
     getTotalPrice(state) {
-      return Number((state.items.reduce((acc, el) => acc + el.price * el.quantityWTB, 0)).toFixed(2))
+      return Number((state.cartItems.reduce((acc, el) => acc + el.price * el.quantityWTB, 0)).toFixed(2))
     }
   },
   actions: {
@@ -24,31 +24,31 @@ export default {
   mutations: {
     addItem(state, item) {
       item.isAdded = true
-      const element = state.items.find((el) => el.id === item.id)
+      const element = state.cartItems.find((el) => el.id === item.id)
       if (element) {
-        this.commit('increaseQuantity', state.items.indexOf(element)) // а как каркать, куда я жмав, ну вроде работает, надо проверить всё
+        this.commit('increaseQuantity', state.cartItems.indexOf(element)) // а как каркать, куда я жмав, ну вроде работает, надо проверить всё
         return
       }
-      state.items.push({ ...item, quantityWTB: 1 })
+      state.cartItems.push({ ...item, quantityWTB: 1 })
     },
     increaseQuantity(state, index) {
-      state.items[index].quantityWTB++
+      state.cartItems[index].quantityWTB++
     },
     decreaseQuantity(state, index) {
-      if (state.items[index].quantityWTB === 1) {
-        this.commit('removeItem', state.items[index])
+      if (state.cartItems[index].quantityWTB === 1) {
+        this.commit('removeItem', state.cartItems[index])
         return
       }
-      state.items[index].quantityWTB--
+      state.cartItems[index].quantityWTB--
     },
     removeItem(state, item) {
       // item.isAdded = false
       this.commit('unmarkAsAdded', item)
-      state.items = state.items.filter((el) => el.id !== item.id)
+      state.cartItems = state.cartItems.filter((el) => el.id !== item.id)
     },
 
     clearCart(state) {
-      state.items.length = 0
+      state.cartItems.length = 0
     },
 
 

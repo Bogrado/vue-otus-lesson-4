@@ -13,6 +13,7 @@ const cartIsEmpty = computed(() => index.getters.getCartItemsList.length === 0)
 const changeVisibility = () => {
   index.dispatch('changeVisibility')
 }
+
 </script>
 
 <template>

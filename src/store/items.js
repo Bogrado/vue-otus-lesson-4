@@ -38,8 +38,16 @@ export default {
     }
   },
   mutations: {
-    setItems(state, items) {
-      state.items = items.map((item) => {
+
+    setItems(state, data) {
+      state.items = data.map((item) => {
+        if (this.getters.getCartItemsList && this.getters.getCartItemsList.find((el) => el.id === item.id)) {
+          return {
+            ...item,
+            isAdded: true,
+            quantityWTB: this.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB
+          }
+        }
         return {
           ...item,
           isFavorite: false,
@@ -62,6 +70,12 @@ export default {
       if (element) {
         element.isAdded = false
       }
-    }
+    },
+    // checkCart(state, item) {
+    //   const element = state.items.find((el) => el.id === item.id)
+    //   if (element) {
+    //     element.isAdded = true
+    //   }
+    // }
   }
 }
