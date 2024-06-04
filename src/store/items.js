@@ -9,6 +9,9 @@ export default {
   getters: {
     getItemsList(state) {
       return state.items
+    },
+    getItemById(state) {
+      return (id) => state.items.find((el) => el.id === id)
     }
   },
   actions: {

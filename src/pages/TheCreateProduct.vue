@@ -13,14 +13,14 @@ defineProps({
   }
 })
 
-const item = computed(() => index.getters.getItem)
+const item = computed(() => index.getters.getItemBeingCreated)
 
 const createItemKey = (key, val) => {
   index.commit('setItemKey', { key: key, value: val })
 }
 
 const createItem = () => {
-  index.dispatch('postItem', index.getters.getItem)
+  index.dispatch('postItem', index.getters.getItemBeingCreated)
 }
 </script>
 

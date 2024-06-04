@@ -17,11 +17,16 @@ const removeFromCart = (item) => {
 
 <template>
   <div class="grid grid-cols-4 gap-4 mt-10">
-    <AppCard
+    <router-link
+      :to=" { name: 'product', params: { id: item.id } }"
       v-for="item in ItemsList" :key="item.id" :item="item"
-      @on-click-add="addToCart"
-      @on-click-remove="removeFromCart"
-    />
+    >
+      <app-card
+        :key="item.id" :item="item"
+        @on-click-add="addToCart"
+        @on-click-remove="removeFromCart"
+      ></app-card>
+    </router-link>
   </div>
 </template>
 

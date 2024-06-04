@@ -19,6 +19,12 @@ export const router = createRouter(
         component: () => import('@/pages/TheCreateProduct.vue')
       },
       {
+        path: '/product/:id',
+        name: 'product',
+        props: true,
+        component: () => import('@/pages/AppProduct.vue')
+      },
+      {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
         component: () => import('@/pages/TheError.vue')
