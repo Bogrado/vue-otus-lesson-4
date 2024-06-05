@@ -14,7 +14,7 @@ export default {
     }
   },
   getters: {
-    getItem(state) {
+    getItemBeingCreated(state) {
       return state.item
     }
   },

@@ -8,6 +8,7 @@ export const router = createRouter(
         name: 'home',
         component: () => import('@/pages/TheHome.vue')
       },
+
       {
         path: '/favorites',
         name: 'favorites',
@@ -17,6 +18,12 @@ export const router = createRouter(
         path: '/create-product',
         name: 'create-product',
         component: () => import('@/pages/TheCreateProduct.vue')
+      },
+      {
+        path: '/product/:id-:price',
+        name: 'product',
+        props: true,
+        component: () => import('@/pages/AppProduct.vue')
       },
       {
         path: '/:pathMatch(.*)*',

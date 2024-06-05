@@ -50,8 +50,8 @@ const findItemQty = (item) => {
              alt="item" />
       </div>
 
-      <div class="footer">
-        <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
+        <div class="footer mt-2">
+          <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
 
         <div
           class="flex justify-between items-center mt-5 bg-gray-700 p-4 rounded-md cursor-default"

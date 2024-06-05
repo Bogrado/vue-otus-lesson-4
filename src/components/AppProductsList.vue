@@ -20,19 +20,27 @@ const decreaseQuantity = (item) => {
   index.dispatch('decreaseQuantity', item)
 }
 
+
+const searchProduct = (item) => {
+  index.dispatch('searchProduct', item)
+}
 </script>
 
 <template>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10">
-    <AppCard
+    <router-link
+      @click="searchProduct(item)"
+      :to=" { name: 'product', params: { id: item.id, price: item.price } }"
       v-for="item in ItemsList" :key="item.id" :item="item"
-      @on-click-add="addToCart"
-      @on-click-remove="removeFromCart"
-      @on-click-decrease="decreaseQuantity"
-    />
+    >
+      <app-card
+        :key="item.id" :item="item"
+        @on-click-add="addToCart"
+        @on-click-remove="removeFromCart"
+        @on-click-decrease="decreaseQuantity"
+      />
+    </router-link>
   </div>
 </template>
 
 <style scoped></style>
-
-<!--@on-click-increase="console.log(item)"-->

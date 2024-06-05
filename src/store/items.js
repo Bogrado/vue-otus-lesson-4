@@ -9,6 +9,9 @@ export default {
   getters: {
     getItemsList(state) {
       return state.items
+    },
+    getItemById(state) {
+      return (id) => state.items.find((el) => el.id === id)
     }
   },
   actions: {
@@ -17,7 +20,8 @@ export default {
 
       try {
         const params = {
-          sortBy: this.getters.getSortBy
+          sortBy: this.getters.getSortBy,
+          title: null
         }
         if (params.sortBy === 'default') {
           params.sortBy = ''
