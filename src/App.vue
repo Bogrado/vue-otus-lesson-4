@@ -2,7 +2,7 @@
 import TheHeader from '@/components/TheHeader.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
 import { index } from '@/store'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 
 const isDrawerOpen = computed(() => index.getters.isOpen)
@@ -13,6 +13,10 @@ const cartIsEmpty = computed(() => index.getters.getCartItemsList.length === 0)
 const changeVisibility = () => {
   index.dispatch('changeVisibility')
 }
+
+onMounted(() => {
+  index.dispatch('checkLocalStorage')
+})
 
 </script>
 
