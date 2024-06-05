@@ -25,13 +25,13 @@ const findItemQty = (item) => index.getters.getCartItemsList.find((el) => el.id 
 <template>
   <div class="flex bg-[#374151] rounded-lg justify-evenly gap-2">
     <app-button
-      @click="$emit('onClickDecrease', item)">
+      @click.prevent.stop="$emit('onClickDecrease', item)">
       <svg-minus :class="classes" />
     </app-button>
     <span class="text-white">{{ findItemQty(item) < 10 ? '0' + findItemQty(item) : findItemQty(item)
       }}</span>
     <app-button
-      @click="$emit('onClickAdd', item)">
+      @click.prevent.stop="$emit('onClickAdd', item)">
       <svg-add :class="classes" />
     </app-button>
   </div>

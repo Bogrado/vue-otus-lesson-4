@@ -66,7 +66,7 @@ const findItemQty = (item) => {
             <svg-add
               v-if="!item.isAdded"
               class="cursor-pointer hover:stroke-current-white"
-              @click="$emit('onClickAdd', item)"
+              @click.prevent.stop="$emit('onClickAdd', item)"
             />
             <div
               v-if="item.isAdded"
