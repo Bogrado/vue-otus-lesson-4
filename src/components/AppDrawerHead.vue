@@ -1,7 +1,16 @@
 <script setup>
 import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
+import AppButton from '@/components/UI/base/AppButton.vue'
+import { index } from '@/store'
 
-const emit = defineEmits(['closeDrawer'])
+defineProps({
+  cartButtonDisabled: {
+    type: Boolean,
+    required: true
+  }
+})
+
+const emit = defineEmits(['closeDrawer', 'onClear'])
 </script>
 
 <template>
@@ -30,7 +39,16 @@ const emit = defineEmits(['closeDrawer'])
         stroke-linejoin="round"
       />
     </svg>
-    <app-main-header class="text-2xl font-bold">Корзина</app-main-header>
+    <div class="flex flex-1 justify-between items-baseline">
+      <app-main-header class="text-2xl font-bold">Корзина</app-main-header>
+      <app-button
+        :disabled="cartButtonDisabled"
+        @click="emit('onClear')"
+        class="bg-gray-800 w-1/3  rounded-lg text-white hover:bg-gray-600 transition active:bg-red-900 disabled:bg-slate-300 disabled:cursor-default cursor-pointer"
+      >
+        Очистить
+      </app-button>
+    </div>
   </div>
 </template>
 

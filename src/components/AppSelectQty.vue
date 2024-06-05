@@ -18,7 +18,11 @@ defineProps({
 
 defineEmits(['onClickAdd', 'onClickRemove', 'onClickDecrease'])
 
-const findItemQty = (item) => index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB
+const findItemQty = (item) => {
+  if (index.getters.getCartItemsList) {
+    return index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB
+  }
+}
 
 </script>
 

@@ -40,12 +40,20 @@ const clearOrder = () => {
   closeDrawer()
   console.log(index.getters.getOrder)
 }
+
+const clearCart = () => {
+  index.commit('clearCart')
+  setTimeout(() => {
+    closeDrawer()
+  }, 3000)
+
+}
 </script>
 
 <template>
-  <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70" @click="closeDrawer"></div>
-  <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-20 p-10">
-    <app-drawer-head @close-drawer="closeDrawer" />
+  <div class="fixed top-0 left-0 h-full w-full bg-black z-30 opacity-70" @click="closeDrawer"></div>
+  <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-50 p-10">
+    <app-drawer-head @on-clear="clearCart" @close-drawer="closeDrawer" :cartButtonDisabled="cartButtonDisabled" />
 
     <template v-if="!cartIsEmpty">
       <div>

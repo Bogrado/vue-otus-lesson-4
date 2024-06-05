@@ -22,7 +22,7 @@ const OpenDrawer = () => {
 
 <template>
   <header
-    class="sticky bottom-0 px-10 py-8 top-0  z-10 flex items-center justify-between p-3 border-b bg-gray-800 border-gray-200 rounded-t-xl"
+    class="sticky bottom-0 px-10 py-8 top-0  z-10  flex items-center justify-between p-3 border-b bg-gray-800 border-gray-200 rounded-t-xl"
   >
     <router-link to="/">
       <div class="flex items-center gap-4 text-white">

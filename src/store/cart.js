@@ -69,7 +69,9 @@ export default {
     },
 
     clearCart(state) {
-      state.cartItems.length = 0
+      state.cartItems.forEach((el) => {
+        this.commit('removeItem', el)
+      })
       updateLocalStorage(state.cartItems)
     },
     setCartItemsList(state, data) {
