@@ -20,7 +20,8 @@ export default {
 
       try {
         const params = {
-          sortBy: this.getters.getSortBy
+          sortBy: this.getters.getSortBy,
+          title: null
         }
         if (params.sortBy === 'default') {
           params.sortBy = ''

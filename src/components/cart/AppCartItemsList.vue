@@ -7,7 +7,6 @@ const cartItems = computed(() => index.getters.getCartItemsList)
 
 const removeFromCart = (item) => {
   index.dispatch('removeFromCart', item)
-  console.log(index.getters.getItemsList)
 }
 </script>
 
