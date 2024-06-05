@@ -2,9 +2,6 @@
 import SvgLikeIt from '@/components/UI/svg/SvgLikeIt.vue'
 import SvgStar from '@/components/UI/svg/SvgStar.vue'
 import SvgAdd from '@/components/UI/svg/SvgAdd.vue'
-import AppButton from '@/components/UI/base/AppButton.vue'
-import { index } from '@/store/'
-import SvgMinus from '@/components/UI/svg/SvgMinus.vue'
 import AppSelectQty from '@/components/AppSelectQty.vue'
 
 defineProps({
@@ -16,9 +13,9 @@ defineProps({
 
 defineEmits(['onClickAdd', 'onClickRemove', 'onClickDecrease'])
 
-const findItemQty = (item) => {
-  return index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB
-}
+// const findItemQty = (item) => {
+//   return index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB
+// }
 
 </script>
 
@@ -54,6 +51,7 @@ const findItemQty = (item) => {
           <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
 
         <div
+          @click.prevent.stop="''"
           class="flex justify-between items-center mt-5 bg-gray-700 p-4 rounded-md cursor-default"
         >
           <div class="flex flex-col">
