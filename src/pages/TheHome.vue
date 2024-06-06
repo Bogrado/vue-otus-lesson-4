@@ -8,7 +8,7 @@ import { computed, onMounted, watch } from 'vue'
 import { index } from '@/store'
 import debounce from 'lodash.debounce'
 import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
-import {vAutoAnimate} from '@formkit/auto-animate'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
 defineProps({
   loadingStatus: {
@@ -27,7 +27,11 @@ const changeSortBy = (sortBy) => {
 }
 
 const fetchItems = async () => {
-  await index.dispatch('fetchItems')
+  await index.dispatch('fetchItems', {
+    url: 'https://6452649f4b080307.mokky.dev/items',
+    option: null,
+    querySelect: 'id,title,price,category,image,rating'
+  })
 }
 
 onMounted(() => {

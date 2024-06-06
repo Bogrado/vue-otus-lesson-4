@@ -3,7 +3,14 @@ import axios from 'axios'
 export default {
   state() {
     return {
-      items: []
+      items: [],
+      queryParams: {
+        sortBy: '',
+        title: null,
+        price: null,
+        id: null,
+        _select: null
+      }
     }
   },
   getters: {
@@ -12,36 +19,62 @@ export default {
     },
     getItemById(state) {
       return (id) => state.items.find((el) => el.id === id)
+    },
+    getQueryParams(state) {
+      return state.queryParams
     }
   },
   actions: {
-    async fetchItems({ commit }) {
+    async fetchItems({ commit }, { url, querySelect, itemId }) {
       commit('setLoading', true)
 
+      // if (option) {
+      //   commit('setOptions', option)
+      // }
+
       try {
-        const params = {
-          sortBy: this.getters.getSortBy,
-          title: null
-        }
-        if (params.sortBy === 'default') {
-          params.sortBy = ''
-        }
+        // const params = this.getters.getQueryParams
 
+        if (this.getters.getSortBy) {
+          this.getters.getSortBy === 'default'
+            ? commit('setQueryParams', { key: 'sortBy', value: '' })
+            : commit('setQueryParams', { key: 'sortBy', value: this.getters.getSortBy })
+        }
         if (this.getters.getSearchValue) {
-          params.title = `*${this.getters.getSearchValue}*`
+          commit('setQueryParams', {
+            key: 'title', value: `*${this.getters.getSearchValue}*`
+          })
         }
 
-        const { data } = await axios.get('https://6452649f4b080307.mokky.dev/items', { params })
+        if (querySelect) {
+          commit('setQueryParams', { key: '_select', value: querySelect })
+        }
+
+        if (itemId) {
+          commit('setQueryParams', { key: 'id', value: itemId })
+        }
+
+        console.log(this.getters.getQueryParams)
+        const { data } = await axios.get(url, { params: this.getters.getQueryParams })
 
         commit('setItems', data)
+
       } catch (error) {
         console.log(error)
       } finally {
         commit('setLoading', false)
+
+        for (const param in this.getters.getQueryParams) {
+          commit('setQueryParams', { key: param, value: null })
+        }
       }
     }
   },
   mutations: {
+
+    setQueryParams(state, { key, value }) {
+      state.queryParams[key] = value
+    },
 
     setItems(state, data) {
       state.items = data.map((item) => {
@@ -61,6 +94,10 @@ export default {
         }
       })
     },
+    setOptions(state, data) {
+      console.log(data.id)
+      state.options = data
+    },
 
 
     unmarkAsAdded(state, item) {
@@ -68,6 +105,6 @@ export default {
       if (element) {
         element.isAdded = false
       }
-    },
+    }
   }
 }

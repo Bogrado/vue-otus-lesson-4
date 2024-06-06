@@ -20,7 +20,8 @@ export const router = createRouter(
         component: () => import('@/pages/TheCreateProduct.vue')
       },
       {
-        path: '/product/:id-:price',
+      // -:price
+        path: '/product-:id',
         name: 'product',
         props: true,
         component: () => import('@/pages/AppProduct.vue')

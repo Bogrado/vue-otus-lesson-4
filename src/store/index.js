@@ -7,7 +7,6 @@ import search from '@/store/search.js'
 import cart from '@/store/cart.js'
 import createOrder from '@/store/createOrder.js'
 import createItem from '@/store/createItem.js'
-import product from '@/store/product.js'
 
 export const index = createStore({
   modules: {
@@ -19,6 +18,5 @@ export const index = createStore({
     cart,
     createOrder,
     createItem,
-    product
   }
 })

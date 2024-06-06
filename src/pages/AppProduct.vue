@@ -1,42 +1,50 @@
 <script setup>
 
-import { computed, onMounted } from 'vue'
+import { onBeforeMount, onMounted, ref } from 'vue'
 import { index } from '@/store'
 import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
 import AppPreloader from '@/components/UI/AppPreloader.vue'
+import AppProductBody from '@/components/layout/AppProductBody.vue'
 
-const { id, price } = defineProps({
+const { id } = defineProps({
   loadingStatus: {
     type: Boolean,
-    required: false
+    required: true
   },
   id: {
     type: String,
-    required: false
+    required: true
   },
-  price: {
-    type: String,
-    required: false
-  }
+  // price: {
+  //   type: String,
+  //   required: true
+  // }
 })
 
-onMounted(() => {
-  index.dispatch('searchProduct', { id, price })
-})
+const product = ref({})
+const setProduct = () => {
+  product.value = index.getters.getItemsList[0]
+}
+const fetchItem = async () => {
+  await index.dispatch('fetchItems', { url: `https://6452649f4b080307.mokky.dev/items/`, itemId: id } )
+  await setProduct()
+}
 
-const product = computed(() => index.getters.getSearchedProduct)
-
+(async () => {
+  console.log(1)
+  await fetchItem()
+  await setProduct()
+})()
 </script>
 
 <template>
   <div v-if="loadingStatus">
     <app-preloader />
   </div>
-  <div v-else>
+  <div v-if="!loadingStatus">
     <app-main-header>{{ product.title }}</app-main-header>
-    <div>
-      {{ product }}
-    </div>
+    <!--    <app-product-body :product="product" v-if="!loadingStatus" />-->
+    <h1>hello</h1>
   </div>
 </template>
 

@@ -27,9 +27,15 @@ const decreaseQuantity = (item) => {
 <template>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10">
     <router-link
-
-      :to=" { name: 'product', params: { id: item.id, price: item.price } }"
-      v-for="item in ItemsList" :key="item.id" :item="item"
+      v-for="item in ItemsList"
+      :key="item.id"
+      :to="{
+        name: 'product',
+        params: {
+          id: item.id,
+          // price: item.price
+        }
+      }"
     >
       <app-card
         :key="item.id" :item="item"

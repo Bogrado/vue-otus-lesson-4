@@ -76,7 +76,6 @@ export default {
     },
     setCartItemsList(state, data) {
       state.cartItems = data
-      console.log(data)
     },
     unmarkAsAdded(state, item) {
       const element = state.cartItems.find((el) => el.id === item.id)
