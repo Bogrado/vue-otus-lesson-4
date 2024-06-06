@@ -17,9 +17,6 @@ export default {
     getItemsList(state) {
       return state.items
     },
-    getItemById(state) {
-      return (id) => state.items.find((el) => el.id === id)
-    },
     getQueryParams(state) {
       return state.queryParams
     }
@@ -28,12 +25,7 @@ export default {
     async fetchItems({ commit }, { url, querySelect, itemId }) {
       commit('setLoading', true)
 
-      // if (option) {
-      //   commit('setOptions', option)
-      // }
-
       try {
-        // const params = this.getters.getQueryParams
 
         if (this.getters.getSortBy) {
           this.getters.getSortBy === 'default'
@@ -94,12 +86,6 @@ export default {
         }
       })
     },
-    setOptions(state, data) {
-      console.log(data.id)
-      state.options = data
-    },
-
-
     unmarkAsAdded(state, item) {
       const element = state.items.find((el) => el.id === item.id)
       if (element) {
