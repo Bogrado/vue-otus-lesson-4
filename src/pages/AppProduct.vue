@@ -7,6 +7,7 @@ import AppPreloader from '@/components/UI/AppPreloader.vue'
 import AppNav from '@/components/layout/AppNav.vue'
 import AppProductRatings from '@/components/layout/AppProductRatings.vue'
 import AppProductInfo from '@/components/layout/AppProductInfo.vue'
+import { onAction } from '@/composables/cartInteracting'
 
 const { id } = defineProps({
   loadingStatus: {
@@ -33,20 +34,6 @@ const fetchItem = async () => {
   await setProduct()
   await console.log(product.value)
 })()
-
-const addToCart = (item) => {
-  item.isAdded = true
-  index.dispatch('addToCart', item)
-}
-const removeFromCart = (item) => {
-  index.dispatch('removeFromCart', item)
-  if (index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB === 0) {
-    item.isAdded = false
-  }
-}
-const decreaseQuantity = (item) => {
-  index.dispatch('decreaseQuantity', item)
-}
 
 </script>
 
@@ -80,9 +67,9 @@ const decreaseQuantity = (item) => {
         </div>
         <app-product-info
           :item="product"
-          @on-click-add="addToCart"
-          @on-click-remove="removeFromCart"
-          @on-click-decrease="decreaseQuantity"
+          @on-click-add="onAction(product, 'addToCart')"
+          @on-click-remove="onAction(product, 'removeFromCart')"
+          @on-click-decrease="onAction(product, 'decreaseQuantity')"
         />
       </div>
     </div>

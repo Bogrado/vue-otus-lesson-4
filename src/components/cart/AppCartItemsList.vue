@@ -2,21 +2,10 @@
 import AppCartItem from '@/components/cart/AppCartItem.vue'
 import { computed } from 'vue'
 import { index } from '@/store/index.js'
+import { onAction } from '@/composables/cartInteracting.js'
 
 const cartItems = computed(() => index.getters.getCartItemsList)
 
-const removeFromCart = (item) => {
-  index.dispatch('removeFromCart', item)
-}
-
-const decreaseQuantity = (item) => {
-  index.dispatch('decreaseQuantity', item)
-}
-
-const addToCart = (item) => {
-  item.isAdded = true
-  index.dispatch('addToCart', item)
-}
 </script>
 
 <template>
@@ -25,9 +14,9 @@ const addToCart = (item) => {
       v-for="item in cartItems"
       :key="item.id"
       :item="item"
-      @on-click-remove="removeFromCart"
-      @on-click-decrease="decreaseQuantity"
-      @onClickAdd="addToCart"
+      @on-click-remove="onAction(item, 'removeFromCart')"
+      @on-click-decrease="onAction(item, 'decreaseQuantity')"
+      @onClickAdd="onAction(item, 'addToCart')"
       v-auto-animate
     />
   </div>

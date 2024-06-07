@@ -54,7 +54,11 @@ const onSubmit = async () => {
   if (result) {
     await index.dispatch('setOrder', user)
     await index.dispatch('createOrder')
-    await index.dispatch('fetchItems')
+    await index.dispatch('fetchItems', {
+      url: 'https://6452649f4b080307.mokky.dev/items',
+      option: null,
+      querySelect: 'id,title,price,category,image,rating'
+    })
     return
   }
   console.log(result)

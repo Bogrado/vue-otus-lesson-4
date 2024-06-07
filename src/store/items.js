@@ -32,6 +32,7 @@ export default {
             ? commit('setQueryParams', { key: 'sortBy', value: '' })
             : commit('setQueryParams', { key: 'sortBy', value: this.getters.getSortBy })
         }
+
         if (this.getters.getSearchValue) {
           commit('setQueryParams', {
             key: 'title', value: `*${this.getters.getSearchValue}*`
@@ -46,7 +47,6 @@ export default {
           commit('setQueryParams', { key: 'id', value: itemId })
         }
 
-        console.log(this.getters.getQueryParams)
         const { data } = await axios.get(url, { params: this.getters.getQueryParams })
 
         commit('setItems', data)
@@ -56,10 +56,10 @@ export default {
         }
 
       } catch (error) {
+        console.log('(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻')
         console.log(error)
       } finally {
         commit('setLoading', false)
-
       }
     }
   },

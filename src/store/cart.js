@@ -1,6 +1,5 @@
-function updateLocalStorage(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart))
-}
+import { updateLocalStorage } from '@/composables/updateStorage'
+
 
 export default {
   state() {
@@ -39,33 +38,25 @@ export default {
       const element = state.cartItems.find((el) => el.id === item.id)
       if (element) {
         this.commit('increaseQuantity', state.cartItems.indexOf(element))// а как каркать, куда я жмав, ну вроде работает, надо проверить всё
-        updateLocalStorage(state.cartItems)
         return
       }
       state.cartItems.push({ ...item, quantityWTB: 1 })
-      updateLocalStorage(state.cartItems)
     },
     increaseQuantity(state, index) {
       state.cartItems[index].quantityWTB++
-      updateLocalStorage(state.cartItems)
     },
     decreaseQuantity(state, item) {
       const element = state.cartItems.find((el) => el.id === item.id)
       if (element.quantityWTB > 1) {
         element.quantityWTB--
-        updateLocalStorage(state.cartItems)
-      }
-      else {
+      } else {
         this.commit('removeItem', item)
         state.cartItems = state.cartItems.filter((el) => el.id !== item.id)
-        updateLocalStorage(state.cartItems)
       }
     },
     removeItem(state, item) {
       this.commit('unmarkAsAdded', item)
       state.cartItems = state.cartItems.filter((el) => el.id !== item.id)
-      updateLocalStorage(state.cartItems)
-
     },
 
     clearCart(state) {
@@ -83,5 +74,5 @@ export default {
         element.isAdded = false
       }
     }
-  },
+  }
 }

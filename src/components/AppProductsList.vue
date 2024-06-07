@@ -2,22 +2,10 @@
 import AppCard from '@/components/AppCard.vue'
 import { computed } from 'vue'
 import { index } from '@/store'
+import { onAction } from '@/composables/cartInteracting'
 
 const ItemsList = computed(() => index.getters.getItemsList)
 
-const addToCart = (item) => {
-  item.isAdded = true
-  index.dispatch('addToCart', item)
-}
-const removeFromCart = (item) => {
-  index.dispatch('removeFromCart', item)
-  if (index.getters.getCartItemsList.find((el) => el.id === item.id).quantityWTB === 0) {
-    item.isAdded = false
-  }
-}
-const decreaseQuantity = (item) => {
-  index.dispatch('decreaseQuantity', item)
-}
 </script>
 
 <template>
@@ -34,9 +22,9 @@ const decreaseQuantity = (item) => {
     >
       <app-card
         :key="item.id" :item="item"
-        @on-click-add="addToCart"
-        @on-click-remove="removeFromCart"
-        @on-click-decrease="decreaseQuantity"
+        @on-click-add="onAction(item, 'addToCart')"
+        @on-click-remove="onAction(item, 'removeFromCart')"
+        @on-click-decrease="onAction(item, 'decreaseQuantity')"
       />
     </router-link>
   </div>
