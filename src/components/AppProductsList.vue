@@ -15,13 +15,9 @@ const removeFromCart = (item) => {
     item.isAdded = false
   }
 }
-
 const decreaseQuantity = (item) => {
   index.dispatch('decreaseQuantity', item)
 }
-// const searchProduct = (item) => {
-//   index.dispatch('searchProduct', item)
-// }
 </script>
 
 <template>
@@ -33,7 +29,6 @@ const decreaseQuantity = (item) => {
         name: 'product',
         params: {
           id: item.id,
-          // price: item.price
         }
       }"
     >

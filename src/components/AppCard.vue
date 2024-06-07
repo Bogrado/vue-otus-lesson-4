@@ -3,6 +3,7 @@ import SvgLikeIt from '@/components/UI/svg/SvgLikeIt.vue'
 import SvgStar from '@/components/UI/svg/SvgStar.vue'
 import SvgAdd from '@/components/UI/svg/SvgAdd.vue'
 import AppSelectQty from '@/components/AppSelectQty.vue'
+import AppProductRatings from '@/components/layout/AppProductRatings.vue'
 
 defineProps({
   item: {
@@ -28,27 +29,17 @@ defineEmits(['onClickAdd', 'onClickRemove', 'onClickDecrease'])
         <svg-like-it
           class="absolute mt-2 top-4 left-4 border-2 fill-slate-200 border-slate-200 rounded-md hover:fill-gray-600 hover:border-gray-600"
         />
-        <div
-          class="mt-2 absolute top-4 right-4 bg-gray-700 p-2 rounded-xl border-2 border-slate-100"
-        >
-          <div class="flex">
-            <div class="text-slate-400 text-xs flex items-center">
-              <svg-star class="mr-1 w-3 h-3" />
-
-              <div>
-                <span>{{ item.rating ? item.rating.rate : 0 }}</span>
-                <span class="ml-2">({{ item.rating ? item.rating.count : 0 }})</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-product-ratings
+          class="absolute top-4 right-4"
+          :rating="{ rate: item.rating ? item.rating.rate : 0, count: item.rating ? item.rating.count : 0}"
+        />
 
         <img class="flex flex-grow flex-col" :src="item.image ? item.image : 'https://placehold.co/230x310'"
              alt="item" />
       </div>
 
-        <div class="footer mt-2">
-          <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
+      <div class="footer mt-2">
+        <p class="line-clamp-1 text-ellipsis overflow-hidden">{{ item.title }}</p>
 
         <div
           @click.prevent.stop="''"
