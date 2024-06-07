@@ -10,23 +10,14 @@ const ItemsList = computed(() => index.getters.getItemsList)
 
 <template>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10">
-    <router-link
-      v-for="item in ItemsList"
-      :key="item.id"
-      :to="{
-        name: 'product',
-        params: {
-          id: item.id,
-        }
-      }"
-    >
+
       <app-card
+        v-for="item in ItemsList"
         :key="item.id" :item="item"
         @on-click-add="onAction(item, 'addToCart')"
         @on-click-remove="onAction(item, 'removeFromCart')"
         @on-click-decrease="onAction(item, 'decreaseQuantity')"
       />
-    </router-link>
   </div>
 </template>
 

@@ -4,6 +4,7 @@ export default {
   state() {
     return {
       items: [],
+      item: [],
       queryParams: {
         sortBy: '',
         title: null,
@@ -19,6 +20,9 @@ export default {
     },
     getQueryParams(state) {
       return state.queryParams
+    },
+    getItem(state) {
+      return state.item
     }
   },
   actions: {
@@ -49,7 +53,9 @@ export default {
 
         const { data } = await axios.get(url, { params: this.getters.getQueryParams })
 
-        commit('setItems', data)
+        itemId
+          ? commit('setItems', { data, place: 'item' })
+          : commit('setItems', { data, place: 'items' })
 
         for (const param in this.getters.getQueryParams) {
           commit('setQueryParams', { key: param, value: null })
@@ -69,8 +75,8 @@ export default {
       state.queryParams[key] = value
     },
 
-    setItems(state, data) {
-      state.items = data.map((item) => {
+    setItems(state, { data, place }) {
+      state[place] = data.map((item) => {
         if (this.getters.getCartItemsList && this.getters.getCartItemsList.find((el) => el.id === item.id)) {
           return {
             ...item,

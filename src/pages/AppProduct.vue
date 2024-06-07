@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref } from 'vue'
+import {  defineComponent, ref } from 'vue'
 import { index } from '@/store'
 import AppMainHeader from '@/components/UI/base/AppMainHeader.vue'
 import AppPreloader from '@/components/UI/AppPreloader.vue'
@@ -8,6 +8,19 @@ import AppNav from '@/components/layout/AppNav.vue'
 import AppProductRatings from '@/components/layout/AppProductRatings.vue'
 import AppProductInfo from '@/components/layout/AppProductInfo.vue'
 import { onAction } from '@/composables/cartInteracting'
+import { Carousel, Navigation, Slide } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+import AppCard from '@/components/AppCard.vue'
+
+defineComponent({
+  name: 'AppProduct',
+  components: {
+    // Pagination,
+    Carousel,
+    Slide,
+    Navigation
+  }
+})
 
 const { id } = defineProps({
   loadingStatus: {
@@ -19,15 +32,35 @@ const { id } = defineProps({
     required: true
   }
 })
-
+const category = ref('')
 const product = ref({})
-const setProduct = () => {
-  product.value = index.getters.getItemsList[0]
+
+const settings = {
+  itemsToShow: 1,
+  snapAlign: 'center'
 }
+
+const breakpoints = {
+  700: {
+    itemsToShow: 2,
+    snapAlign: 'center'
+  },
+  1024: {
+    itemsToShow: 3,
+    snapAlign: 'start'
+  }
+}
+const setProduct = () => {
+  product.value = index.getters.getItem[0]
+  category.value = index.getters.getItem[0].category
+}
+
+
 const fetchItem = async () => {
   await index.dispatch('fetchItems', { url: `https://6452649f4b080307.mokky.dev/items/`, itemId: id })
   await setProduct()
 }
+
 
 (async () => {
   await fetchItem()
@@ -72,9 +105,51 @@ const fetchItem = async () => {
           @on-click-decrease="onAction(product, 'decreaseQuantity')"
         />
       </div>
+      <div class="mt-10">
+
+        <Carousel :settings="settings" :breakpoints="breakpoints">
+          <Slide
+            v-for="item in index.getters.getItemsList.filter(el => el.category === category)"
+            :key="item.id"
+            class="max-w-64"
+          >
+            <app-card
+              :item="item" @on-click-add="onAction(item, 'addToCart')"
+              @on-click-remove="onAction(item, 'removeFromCart')"
+              @on-click-decrease="onAction(item, 'decreaseQuantity')"
+            />
+          </Slide>
+
+          <template #addons>
+            <Navigation />
+          </template>
+
+        </Carousel>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.carousel__item {
+  min-height: 200px;
+  width: 100%;
+  background-color: var(--vc-clr-primary);
+  color: var(--vc-clr-white);
+  font-size: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel__slide {
+  padding: 10px;
+}
+
+.carousel__prev,
+.carousel__next {
+  box-sizing: content-box;
+  border: 5px solid white;
+}
 </style>
