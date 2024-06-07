@@ -23,8 +23,8 @@ export default {
   },
   actions: {
     async fetchItems({ commit }, { url, querySelect, itemId }) {
-      commit('setLoading', true)
 
+      commit('setLoading', true)
       try {
 
         if (this.getters.getSortBy) {
@@ -51,14 +51,15 @@ export default {
 
         commit('setItems', data)
 
+        for (const param in this.getters.getQueryParams) {
+          commit('setQueryParams', { key: param, value: null })
+        }
+
       } catch (error) {
         console.log(error)
       } finally {
         commit('setLoading', false)
 
-        for (const param in this.getters.getQueryParams) {
-          commit('setQueryParams', { key: param, value: null })
-        }
       }
     }
   },

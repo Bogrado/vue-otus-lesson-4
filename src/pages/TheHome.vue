@@ -52,7 +52,7 @@ watch([sortBy, searchValue], fetchItems)
     <div class="flex gap-4">
       <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />
 
-      <app-search :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="searchItem" />
+      <app-search :search-value="searchValue" :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="searchItem" />
     </div>
   </div>
 
