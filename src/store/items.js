@@ -53,9 +53,10 @@ export default {
 
         const { data } = await axios.get(url, { params: this.getters.getQueryParams })
 
-        itemId
-          ? commit('setItems', { data, place: 'item' })
-          : commit('setItems', { data, place: 'items' })
+        // itemId
+        //   ? commit('setItems', { data, place: 'item' })
+        //   :
+        commit('setItems', { data, place: 'items' })
 
         for (const param in this.getters.getQueryParams) {
           commit('setQueryParams', { key: param, value: null })
