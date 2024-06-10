@@ -3,20 +3,11 @@ import { reactive, ref } from 'vue'
 import { useLoadingStatus } from '@/pinia/loadingStatus.js'
 import axios from 'axios'
 import { useSearch } from '@/pinia/search.js'
+import { useSortBy } from '@/pinia/sortBy.js'
 
 export const useLoadItems = defineStore('loadItems', () => {
 
   const itemsList = reactive([])
-  // const searchValue = ref('')
-  const sortBy = ref('')
-
-  const filters = [
-    { name: 'default', label: 'По умолчанию', value: '' },
-    { name: 'title', label: 'По названию', value: 'title' },
-    { name: 'price', label: 'По цене (Сначала недорогие)', value: 'price' },
-    { name: '-price', label: 'По цене (Подороже)', value: '-price' },
-    { name: 'category', label: 'По категории', value: 'category' }
-  ]
 
   const queryParams = {
     sortBy: null,
@@ -32,8 +23,8 @@ export const useLoadItems = defineStore('loadItems', () => {
     if (select) {
       queryParams._select = select
     }
-    if (sortBy.value) {
-      queryParams.sortBy = sortBy.value
+    if (useSortBy().sortByValue) {
+      queryParams.sortBy = useSortBy().sortByValue
     }
   }
 
@@ -66,5 +57,5 @@ export const useLoadItems = defineStore('loadItems', () => {
     }
   }
 
-  return { fetchItems, itemsList, queryParams, filters, sortBy }
+  return { fetchItems, itemsList, queryParams }
 })
