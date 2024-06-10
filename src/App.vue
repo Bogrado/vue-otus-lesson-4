@@ -3,7 +3,7 @@ import TheHeader from '@/components/TheHeader.vue'
 import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
 import { useDrawerStore } from '@/pinia/drawer.js'
-import { useLoadingStatus } from '@/pinia/loadingStatus.js'
+import { useLoadingStatus } from '@/pinia/getItems/loadingStatus.js'
 import { vAutoAnimate } from '@formkit/auto-animate'
 
 

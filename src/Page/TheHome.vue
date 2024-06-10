@@ -6,9 +6,9 @@ import AppSort from '@/components/AppSort.vue'
 import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import debounce from 'lodash.debounce'
-import { useLoadItems } from '@/pinia/loadItems.js'
-import { useSearch } from '@/pinia/search.js'
-import { useSortBy } from '@/pinia/sortBy.js'
+import { useLoadItems } from '@/pinia/getItems/loadItems.js'
+import { useSearch } from '@/pinia/getItems/search.js'
+import { useSortBy } from '@/pinia/getItems/sortBy.js'
 
 defineProps({
   loadingStatus: {

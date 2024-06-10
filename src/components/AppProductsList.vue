@@ -1,6 +1,6 @@
 <script setup>
 import AppCard from '@/components/AppCard.vue'
-import { useLoadItems } from '@/pinia/loadItems.js'
+import { useLoadItems } from '@/pinia/getItems/loadItems.js'
 
 const itemsList = useLoadItems().itemsList
 
