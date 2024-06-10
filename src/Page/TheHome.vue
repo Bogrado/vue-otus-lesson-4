@@ -7,6 +7,7 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/loadItems.js'
+import { useSearch } from '@/pinia/search.js'
 
 defineProps({
   loadingStatus: {
@@ -16,20 +17,19 @@ defineProps({
 })
 
 const searchValue = computed(() => {
-  return useLoadItems().searchValue
+  return useSearch().searchValue
 })
 
 const findItems = debounce((value) => {
-  useLoadItems().searchValue = value
+  useSearch().searchValue = value
 }, 500)
 
 const changeSortBy = (value) => {
   useLoadItems().sortBy = value
 }
 
-
 const fetchItems = async () => {
-  await useLoadItems().fetchItems('https://6452649f4b080307.mokky.dev/items', useLoadItems().itemsList, 'id,title,price,category,image,rating')
+  await useLoadItems().fetchItems('https://6f8022cf47b3f024.mokky.dev/items', useLoadItems().itemsList, 'id,title,price,category,image,rating')
 }
 
 onMounted(() => {

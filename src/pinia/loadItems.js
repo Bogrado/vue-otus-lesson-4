@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import { useLoadingStatus } from '@/pinia/loadingStatus.js'
 import axios from 'axios'
+import { useSearch } from '@/pinia/search.js'
 
 export const useLoadItems = defineStore('loadItems', () => {
 
   const itemsList = reactive([])
-  const searchValue = ref('')
+  // const searchValue = ref('')
   const sortBy = ref('')
 
   const filters = [
@@ -24,8 +25,9 @@ export const useLoadItems = defineStore('loadItems', () => {
     _select: null
   }
   const checkQuery = (select) => {
-    if (searchValue.value) {
-      queryParams.title = `*${searchValue.value}*`
+    if (useSearch().searchValue) {
+      console.log(useSearch().searchValue)
+      queryParams.title = `*${useSearch().searchValue}*`
     }
     if (select) {
       queryParams._select = select
@@ -64,5 +66,5 @@ export const useLoadItems = defineStore('loadItems', () => {
     }
   }
 
-  return { fetchItems, itemsList, queryParams, searchValue, filters, sortBy }
+  return { fetchItems, itemsList, queryParams, filters, sortBy }
 })
