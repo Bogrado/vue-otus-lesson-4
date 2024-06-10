@@ -1,11 +1,12 @@
 <script setup>
 import AppDrawerHead from '@/components/AppDrawerHead.vue'
 import { index } from '@/store/index.js'
+import { useDrawerStore } from '@/pinia/drawer.js'
 
+
+const drawerStore = useDrawerStore()
 const closeDrawer = () => {
-  if (index.getters.isOpen) {
-    index.dispatch('changeVisibility')
-  }
+  drawerStore.toggleDrawer()
 }
 </script>
 

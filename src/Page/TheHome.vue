@@ -7,6 +7,7 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import { index } from '@/store'
 import debounce from 'lodash.debounce'
+import { useLoadItems } from '@/pinia/loadItems.js'
 
 defineProps({
   loadingStatus: {
@@ -26,7 +27,7 @@ const changeSortBy = (sortBy) => {
 }
 
 const fetchItems = async () => {
-  await index.dispatch('fetchItems')
+  await useLoadItems().fetchItems(useLoadItems().itemsList)
 }
 
 onMounted(() => {
@@ -41,7 +42,7 @@ watch([sortBy, searchValue], fetchItems)
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between itemsList-center">
     <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">

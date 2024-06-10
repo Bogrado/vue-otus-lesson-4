@@ -25,7 +25,7 @@ defineProps({
           class="mt-2 absolute top-4 right-4 bg-gray-700 p-2 rounded-xl border-2 border-slate-100"
         >
           <div class="flex">
-            <div class="text-slate-400 text-xs flex items-center">
+            <div class="text-slate-400 text-xs flex itemsList-center">
               <svg-star class="mr-1 w-3 h-3" />
 
               <div>
@@ -43,7 +43,7 @@ defineProps({
         <p>{{ item.title }}</p>
 
         <div
-          class="flex justify-between items-center mt-5 bg-gray-700 p-4 rounded-md cursor-default"
+          class="flex justify-between itemsList-center mt-5 bg-gray-700 p-4 rounded-md cursor-default"
         >
           <div class="flex flex-col">
             <span class="text-slate-400">Цена: </span>
