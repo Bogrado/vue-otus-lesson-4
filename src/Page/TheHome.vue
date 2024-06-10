@@ -7,6 +7,7 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/loadItems.js'
+import { useSortBy } from '@/pinia/sortBy.js'
 
 defineProps({
   loadingStatus: {
@@ -24,7 +25,7 @@ const findItems = debounce((value) => {
 }, 500)
 
 const changeSortBy = (value) => {
-  useLoadItems().sortBy = value
+  useSortBy().sortByValue = value
 }
 
 
@@ -36,7 +37,7 @@ onMounted(() => {
   fetchItems()
 })
 
-watch([computed(() => useLoadItems().sortBy), searchValue], fetchItems)
+watch([computed(() => useSortBy().sortByValue), searchValue], fetchItems)
 
 </script>
 
@@ -46,7 +47,7 @@ watch([computed(() => useLoadItems().sortBy), searchValue], fetchItems)
     <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">
-      <app-sort @change-sort-by="changeSortBy" :filters="useLoadItems().filters" :sortBy="useLoadItems().sortBy" />
+      <app-sort @change-sort-by="changeSortBy" :filters="useSortBy().filters" :sortBy="useSortBy().sortByValue" />
 
       <app-search @on-change-search-input="findItems" />
     </div>
