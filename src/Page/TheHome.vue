@@ -5,7 +5,6 @@ import AppLoader from '@/components/UI/AppPreloader.vue'
 import AppSort from '@/components/AppSort.vue'
 import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
-import { index } from '@/store'
 import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/loadItems.js'
 
@@ -16,29 +15,29 @@ defineProps({
   }
 })
 
-const sortBy = computed(() => index.getters.getSortBy)
-const filters = computed(() => index.getters.getFilters)
-const searchPlaceholder = computed(() => index.getters.getPlaceholder)
-const searchValue = computed(() => index.getters.getSearchValue)
+const searchValue = computed(() => {
+  return useLoadItems().searchValue
+})
 
-const changeSortBy = (sortBy) => {
-  index.dispatch('changeSortBy', sortBy)
-  console.log(index.getters.getSortBy)
+const findItems = debounce((value) => {
+  useLoadItems().searchValue = value
+}, 500)
+
+const changeSortBy = (value) => {
+  useLoadItems().sortBy = value
 }
 
+
 const fetchItems = async () => {
-  await useLoadItems().fetchItems(useLoadItems().itemsList)
+  await useLoadItems().fetchItems('https://6452649f4b080307.mokky.dev/items', useLoadItems().itemsList, 'id,title,price,category,image,rating')
 }
 
 onMounted(() => {
   fetchItems()
 })
 
-const searchItem = debounce((searchValue) => {
-  index.dispatch('setSearchValue', searchValue)
-}, 500)
+watch([computed(() => useLoadItems().sortBy), searchValue], fetchItems)
 
-watch([sortBy, searchValue], fetchItems)
 </script>
 
 <template>
@@ -46,9 +45,9 @@ watch([sortBy, searchValue], fetchItems)
     <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">
-      <app-sort @change-sort-by="changeSortBy" :filters="filters" :sortBy="sortBy" />
+      <app-sort @change-sort-by="changeSortBy" :filters="useLoadItems().filters" :sortBy="useLoadItems().sortBy" />
 
-      <app-search :searchPlaceholder="searchPlaceholder" @onChangeSearchInput="searchItem" />
+      <app-search @on-change-search-input="findItems" />
     </div>
   </div>
 

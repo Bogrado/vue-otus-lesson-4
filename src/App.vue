@@ -4,6 +4,7 @@ import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
 import { useDrawerStore } from '@/pinia/drawer.js'
 import { useLoadingStatus } from '@/pinia/loadingStatus.js'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
 
 const drawerStore = useDrawerStore()
