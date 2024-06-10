@@ -10,7 +10,8 @@ export const index = createStore({
     drawer,
     items,
     loading,
+    search,
     sorting,
-    search
+
   }
 })

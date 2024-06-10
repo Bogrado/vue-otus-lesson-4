@@ -12,7 +12,7 @@ export default {
     }
   },
   actions: {
-    async fetchItems({ commit }) {
+    async fetchItems({ commit }, queryParams) {
       commit('setLoading', true)
 
       try {
