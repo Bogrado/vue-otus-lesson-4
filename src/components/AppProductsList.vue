@@ -9,7 +9,7 @@ const catalog = useLoadItems()
 
 <template>
   <div class="grid grid-cols-4 gap-4 mt-10">
-    <AppCard v-for="item in catalog.itemsList" :key="item.id" :item="item"/>
+    <AppCard v-for="item in catalog.itemsList" :key="item.id" :item="item" />
   </div>
 </template>
 

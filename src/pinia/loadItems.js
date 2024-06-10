@@ -58,9 +58,7 @@ export const useLoadItems = defineStore('loadItems', () => {
     } catch (error) {
       console.log(error)
     } finally {
-      setTimeout(() => {
-        useLoadingStatus().toggleLoading()
-      }, 500)
+      useLoadingStatus().toggleLoading()
       queryParams.sortBy = null
       queryParams.title = null
     }

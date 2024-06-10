@@ -7,6 +7,7 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/loadItems.js'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
 defineProps({
   loadingStatus: {
@@ -41,7 +42,8 @@ watch([computed(() => useLoadItems().sortBy), searchValue], fetchItems)
 </script>
 
 <template>
-  <div class="flex justify-between itemsList-center">
+  <div
+    class="flex justify-between itemsList-center">
     <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">
@@ -52,9 +54,10 @@ watch([computed(() => useLoadItems().sortBy), searchValue], fetchItems)
   </div>
 
   <div class="mt-10">
-    <app-products-list v-auto-animate />
-
-    <app-loader v-if="loadingStatus" />
+<!--    <app-loader v-if="loadingStatus" />-->
+    <div>
+      <app-products-list v-auto-animate/>
+    </div>
   </div>
 </template>
 

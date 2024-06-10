@@ -1,6 +1,5 @@
 <script setup>
 import AppDrawerHead from '@/components/AppDrawerHead.vue'
-import { index } from '@/store/index.js'
 import { useDrawerStore } from '@/pinia/drawer.js'
 
 
