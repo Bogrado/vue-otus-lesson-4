@@ -4,6 +4,7 @@ import TheHome from '@/Page/TheHome.vue'
 import AppDrawer from '@/components/AppDrawer.vue'
 import { useDrawerStore } from '@/pinia/drawer.js'
 import { useLoadingStatus } from '@/pinia/loadingStatus.js'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
 
 
@@ -20,10 +21,10 @@ const toggleDrawer = () => {
 <template>
   <app-drawer v-if="drawerStore.isOpen" />
 
-  <div class="w-4/5 m-auto bg-white rounded-xl shadow-2xl mt-14">
+  <div class="w-4/5 m-auto bg-white rounded-xl shadow-2xl mt-14" >
     <TheHeader @open-drawer="toggleDrawer" :is-drawer-open="drawerStore.isOpen" />
 
-    <div class="p-10">
+    <div class="p-10" v-auto-animate>
       <the-home :loadingStatus="loadingStatus.loading" />
     </div>
   </div>

@@ -7,7 +7,6 @@ import AppSearch from '@/components/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/loadItems.js'
-import { vAutoAnimate } from '@formkit/auto-animate'
 
 defineProps({
   loadingStatus: {
@@ -54,10 +53,12 @@ watch([computed(() => useLoadItems().sortBy), searchValue], fetchItems)
   </div>
 
   <div class="mt-10">
-<!--    <app-loader v-if="loadingStatus" />-->
-    <div>
-      <app-products-list v-auto-animate/>
+    <div class="min-h-screen">
+      <app-products-list/>
     </div>
+
+    <app-loader v-if="loadingStatus" />
+
   </div>
 </template>
 
