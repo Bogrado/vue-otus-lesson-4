@@ -9,6 +9,7 @@ import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/getItems/loadedItems.js'
 import { useSearch } from '@/pinia/getItems/search.js'
 import { useSortBy } from '@/pinia/getItems/sortBy.js'
+import { useParams } from '@/pinia/getItems/params.js'
 
 defineProps({
   loadingStatus: {
@@ -17,32 +18,41 @@ defineProps({
   }
 })
 
+const itemsStore = useLoadItems()
+const searchStore = useSearch()
+const sortByStore = useSortBy()
+const paramsStore = useParams()
+
 const items = computed(() => {
-  return useLoadItems().itemsList
+  return itemsStore.itemsList
 })
 
 const searchValue = computed(() => {
-  return useSearch().searchValue
+  return searchStore.searchValue
+})
+
+const sortByValue = computed(() => {
+  return sortByStore.sortByValue
 })
 
 const findItems = debounce((value) => {
-  useSearch().searchValue = value
+  searchStore.searchValue = value
 }, 500)
 
 const changeSortBy = (value) => {
-  useSortBy().sortByValue = value
+  sortByStore.sortByValue = value
 }
 
 
 const fetchItems = async () => {
-  await useLoadItems().fetchItems('https://6f8022cf47b3f024.mokky.dev/items', useLoadItems().itemsList, 'id,title,price,category,image,rating')
+  await itemsStore.fetchItems('https://6f8022cf47b3f024.mokky.dev/items', itemsStore.itemsList, paramsStore.params)
 }
 
 onMounted(() => {
   fetchItems()
 })
 
-watch([computed(() => useSortBy().sortByValue), searchValue], fetchItems)
+watch([sortByValue, searchValue], fetchItems)
 
 </script>
 
@@ -52,7 +62,7 @@ watch([computed(() => useSortBy().sortByValue), searchValue], fetchItems)
     <h2 class="text-3xl font-bold">Товары</h2>
 
     <div class="flex gap-4">
-      <app-sort @change-sort-by="changeSortBy" :filters="useSortBy().filters" :sortBy="useSortBy().sortByValue" />
+      <app-sort @change-sort-by="changeSortBy" :filters="sortByStore.filters" :sortBy="sortByStore.sortByValue" />
 
       <app-search @on-change-search-input="findItems" />
     </div>

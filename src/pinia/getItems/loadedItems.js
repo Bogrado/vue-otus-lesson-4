@@ -2,47 +2,40 @@ import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { useLoadingStatus } from '@/pinia/getItems/loadingStatus.js'
 import axios from 'axios'
-import { useParams } from '@/pinia/getItems/params.js'
 
 export const useLoadItems = defineStore('loadItems', () => {
 
   const itemsList = reactive([])
 
-  const queryParams = {
-    sortBy: null,
-    title: null,
-    id: null,
-    _select: null
-  }
 
-  const deleteItems = (place) => {
-    if (place.length > 0) {
-      place.length = 0
+  const deleteItems = (state) => {
+    if (state.length > 0) {
+      state.length = 0
     }
   }
-  const setItems = (data, place) => {
-    data.forEach(item => place.push(item))
+  const setItems = (data, state) => {
+    data.forEach(item => state.push(item))
   }
-  const fetchItems = async (url, place, select) => {
+  const fetchItems = async (url, state, params) => {
 
     useLoadingStatus().toggleLoading()
 
     try {
 
-      useParams().checkQuery(select)
-      deleteItems(place)
+      deleteItems(state)
 
-      const { data } = await axios.get(url, { params: useParams().params })
+      const { data } = await axios.get(url, { params: params })
 
-      setItems(data, place)
+      setItems(data, state)
 
     } catch (error) {
+
       console.log(error)
+
     } finally {
       useLoadingStatus().toggleLoading()
-      useParams().clearParams(useParams().params)
     }
   }
 
-  return { fetchItems, itemsList, queryParams }
+  return { fetchItems, itemsList }
 })
