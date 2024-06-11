@@ -19,13 +19,13 @@ const toggleDrawer = () => {
 </script>
 
 <template>
-  <app-drawer v-if="drawerStore.isOpen" />
+  <app-drawer v-if="drawerStore.isOpen" :loading="loadingStatus.loading"/>
 
   <div class="w-4/5 m-auto bg-white rounded-xl shadow-2xl mt-14" >
     <TheHeader @open-drawer="toggleDrawer" :is-drawer-open="drawerStore.isOpen" />
 
     <div class="p-10" v-auto-animate>
-      <the-home :loadingStatus="loadingStatus.loading" />
+      <the-home :loading="loadingStatus.loading" />
     </div>
   </div>
 </template>

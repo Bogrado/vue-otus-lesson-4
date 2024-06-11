@@ -4,21 +4,23 @@ import AppProductsList from '@/components/items/AppProductsList.vue'
 import AppLoader from '@/components/UI/AppPreloader.vue'
 import AppSort from '@/components/items/AppSort.vue'
 import AppSearch from '@/components/items/AppSearch.vue'
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import { useLoadItems } from '@/pinia/getItems/loadedItems.js'
 import { useSearch } from '@/pinia/getItems/search.js'
 import { useSortBy } from '@/pinia/getItems/sortBy.js'
 import { useParams } from '@/pinia/getItems/params.js'
+import { useCartStore } from '@/pinia/cart/cart.js'
 
 defineProps({
-  loadingStatus: {
+  loading: {
     type: Boolean,
     default: false
   }
 })
 
 const itemsStore = useLoadItems()
+const cartStore = useCartStore()
 const searchStore = useSearch()
 const sortByStore = useSortBy()
 const paramsStore = useParams()
@@ -35,6 +37,8 @@ const sortByValue = computed(() => {
   return sortByStore.sortByValue
 })
 
+const itemIds = cartStore.idsInCart
+
 const findItems = debounce((value) => {
   searchStore.searchValue = value
 }, 500)
@@ -43,9 +47,17 @@ const changeSortBy = (value) => {
   sortByStore.sortByValue = value
 }
 
+const params = ref({
+  id: cartStore.idsInCart,
+  _select: 'id,title,price,image'
+})
 
 const fetchItems = async () => {
   await itemsStore.fetchItems('https://6f8022cf47b3f024.mokky.dev/items', itemsStore.itemsList, paramsStore.params)
+}
+
+const fetchCartItems = async () => {
+  await itemsStore.fetchItems('https://6f8022cf47b3f024.mokky.dev/cart', cartStore.cartItemsList, params)
 }
 
 onMounted(() => {
@@ -53,6 +65,7 @@ onMounted(() => {
 })
 
 watch([sortByValue, searchValue], fetchItems)
+watch([itemIds], fetchCartItems)
 
 </script>
 
@@ -73,7 +86,7 @@ watch([sortByValue, searchValue], fetchItems)
       <app-products-list :items="items" />
     </div>
 
-    <app-loader v-if="loadingStatus" />
+    <app-loader v-if="loading" />
 
   </div>
 </template>

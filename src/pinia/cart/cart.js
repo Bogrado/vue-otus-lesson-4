@@ -7,6 +7,8 @@ export const useCartStore = defineStore('cart', () => {
     inCart: {}
   })
 
+  const cartItemsList = reactive([])
+
 
   const addToCart = (id, count) => {
     const item = cartState.inCart[id]
@@ -26,5 +28,5 @@ export const useCartStore = defineStore('cart', () => {
   //   cartItems.splice(cartItems.indexOf(item), 1)
   // }
 
-  return { addToCart, idsInCart, cartState }
+  return { addToCart, idsInCart, cartState, cartItemsList }
 })

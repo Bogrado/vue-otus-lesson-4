@@ -2,12 +2,29 @@
 import AppDrawerHead from '@/components/cart/AppDrawerHead.vue'
 import { useDrawerStore } from '@/pinia/drawer.js'
 import AppCartProductsList from '@/components/cart/AppCartProductsList.vue'
+import { useCartStore } from '@/pinia/cart/cart.js'
+import { onMounted, ref } from 'vue'
+import { useLoadItems } from '@/pinia/getItems/loadedItems.js'
+import AppPreloader from '@/components/UI/AppPreloader.vue'
+
+defineProps({
+  loading: {
+    type: Boolean
+  }
+})
 
 
 const drawerStore = useDrawerStore()
 const closeDrawer = () => {
   drawerStore.toggleDrawer()
 }
+
+const cartStore = useCartStore()
+const itemsStore = useLoadItems()
+
+
+
+
 </script>
 
 <template>
@@ -15,7 +32,9 @@ const closeDrawer = () => {
   <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-20 p-10">
     <app-drawer-head @close-drawer="closeDrawer" />
 
-    <app-cart-products-list />
+    <app-preloader v-if="loading" />
+
+    <app-cart-products-list v-else />
 
     <div class="flex flex-col gap-4 mt-7">
       <div class="flex gap-2">

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useLoadingStatus = defineStore('loadingStatus', () => {
+export const useLoadingStatus = defineStore('loading', () => {
   const loading = ref(false)
   const toggleLoading = () => {
     loading.value = !loading.value
