@@ -1,6 +1,7 @@
 <script setup>
-import AppDrawerHead from '@/components/AppDrawerHead.vue'
+import AppDrawerHead from '@/components/cart/AppDrawerHead.vue'
 import { useDrawerStore } from '@/pinia/drawer.js'
+import AppProductsList from '@/components/items/AppProductsList.vue'
 
 
 const drawerStore = useDrawerStore()
@@ -14,7 +15,9 @@ const closeDrawer = () => {
   <div class="bg-gray-100 w-96 h-full fixed right-0 top-0 z-20 p-10">
     <app-drawer-head @close-drawer="closeDrawer" />
 
-    <!--    <AppCartItemList v-if="totalPrice" />-->
+        <app-products-list
+          class="flex flex-col gap-4 justify-between"
+        />
 
     <div class="flex flex-col gap-4 mt-7">
       <div class="flex gap-2">

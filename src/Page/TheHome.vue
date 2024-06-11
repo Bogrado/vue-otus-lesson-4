@@ -1,12 +1,12 @@
 <script setup>
 
-import AppProductsList from '@/components/AppProductsList.vue'
+import AppProductsList from '@/components/items/AppProductsList.vue'
 import AppLoader from '@/components/UI/AppPreloader.vue'
-import AppSort from '@/components/AppSort.vue'
-import AppSearch from '@/components/AppSearch.vue'
+import AppSort from '@/components/items/AppSort.vue'
+import AppSearch from '@/components/items/AppSearch.vue'
 import { computed, onMounted, watch } from 'vue'
 import debounce from 'lodash.debounce'
-import { useLoadItems } from '@/pinia/getItems/loadItems.js'
+import { useLoadItems } from '@/pinia/getItems/loadedItems.js'
 import { useSearch } from '@/pinia/getItems/search.js'
 import { useSortBy } from '@/pinia/getItems/sortBy.js'
 
@@ -15,6 +15,10 @@ defineProps({
     type: Boolean,
     default: false
   }
+})
+
+const items = computed(() => {
+  return useLoadItems().itemsList
 })
 
 const searchValue = computed(() => {
@@ -56,7 +60,10 @@ watch([computed(() => useSortBy().sortByValue), searchValue], fetchItems)
 
   <div class="mt-10">
     <div class="min-h-screen">
-      <app-products-list/>
+      <app-products-list
+        class="grid grid-cols-4 gap-4 mt-10"
+        :items="items"
+      />
     </div>
 
     <app-loader v-if="loadingStatus" />
