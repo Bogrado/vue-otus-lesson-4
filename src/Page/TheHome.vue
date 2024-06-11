@@ -37,7 +37,9 @@ const sortByValue = computed(() => {
   return sortByStore.sortByValue
 })
 
-const itemIds = cartStore.idsInCart
+const itemIds123 = computed(() => {
+  return cartStore.idsInCart
+})
 
 const findItems = debounce((value) => {
   searchStore.searchValue = value
@@ -48,7 +50,7 @@ const changeSortBy = (value) => {
 }
 
 const params = ref({
-  id: cartStore.idsInCart,
+  id: itemIds123,
   _select: 'id,title,price,image'
 })
 
@@ -57,7 +59,7 @@ const fetchItems = async () => {
 }
 
 const fetchCartItems = async () => {
-  await itemsStore.fetchItems('https://6f8022cf47b3f024.mokky.dev/cart', cartStore.cartItemsList, params)
+  await itemsStore.fetchItems('https://6f8022cf47b3f024.mokky.dev/items', cartStore.cartItemsList, params.value)
 }
 
 onMounted(() => {
@@ -65,7 +67,7 @@ onMounted(() => {
 })
 
 watch([sortByValue, searchValue], fetchItems)
-watch([itemIds], fetchCartItems)
+watch([itemIds123], fetchCartItems)
 
 </script>
 
