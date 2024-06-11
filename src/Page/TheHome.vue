@@ -60,10 +60,7 @@ watch([computed(() => useSortBy().sortByValue), searchValue], fetchItems)
 
   <div class="mt-10">
     <div class="min-h-screen">
-      <app-products-list
-        class="grid grid-cols-4 gap-4 mt-10"
-        :items="items"
-      />
+      <app-products-list :items="items" />
     </div>
 
     <app-loader v-if="loadingStatus" />

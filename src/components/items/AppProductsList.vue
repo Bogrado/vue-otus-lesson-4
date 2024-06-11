@@ -11,9 +11,8 @@ defineProps({
 </script>
 
 <template>
-  <div
-    v-auto-animate="{duration: 500}">
-      <AppCard v-for="item in items" :key="item.id" :item="item" />
+  <div class="grid grid-cols-4 gap-4 mt-10" v-auto-animate="{duration: 500}">
+    <AppCard v-for="item in items" :key="item.id" :item="item" />
   </div>
 </template>
 
