@@ -3,6 +3,8 @@ import SvgLikeIt from '@/components/UI/svg/SvgLikeIt.vue'
 import SvgStar from '@/components/UI/svg/SvgStar.vue'
 import SvgAdd from '@/components/UI/svg/SvgAdd.vue'
 
+defineEmits(['onClickAdd'])
+
 defineProps({
   item: {
     type: Object,
@@ -50,7 +52,9 @@ defineProps({
             <b class="mt-2 text-white">{{ item.price }} Руб.</b>
           </div>
 
-          <svg-add class="cursor-pointer hover:stroke-slate-400" />
+          <svg-add class="cursor-pointer hover:stroke-slate-400"
+                   @click="$emit('onClickAdd', item.id)"
+          />
         </div>
       </div>
     </div>
